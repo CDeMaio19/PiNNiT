@@ -3,22 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F46487A26B0C83100136DAF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46487926B0C83100136DAF /* SignUpViewController.swift */; };
+		2F46487C26B0C84700136DAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46487B26B0C84700136DAF /* LoginViewController.swift */; };
+		2F46487E26B0C85400136DAF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46487D26B0C85400136DAF /* HomeViewController.swift */; };
+		2F46488326B0D3B600136DAF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F46488226B0D3B600136DAF /* GoogleService-Info.plist */; };
+		2F46488626B0DB4800136DAF /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46488526B0DB4800136DAF /* Help.swift */; };
 		2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454426ADC913004E3365 /* AppDelegate.swift */; };
 		2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454626ADC913004E3365 /* SceneDelegate.swift */; };
 		2FA6454926ADC913004E3365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454826ADC913004E3365 /* ViewController.swift */; };
 		2FA6454C26ADC913004E3365 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA6454A26ADC913004E3365 /* Main.storyboard */; };
 		2FA6454E26ADC915004E3365 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA6454D26ADC915004E3365 /* Assets.xcassets */; };
 		2FA6455126ADC915004E3365 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA6454F26ADC915004E3365 /* LaunchScreen.storyboard */; };
-		2FA6455926ADCB00004E3365 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FA6455826ADCB00004E3365 /* GoogleService-Info.plist */; };
 		8FD45EB65A1EBC82C080B281 /* Pods_PiNNiT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C7D94370505F4EBF806C3A /* Pods_PiNNiT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00370486717CFB045847A1C6 /* Pods-PiNNiT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.release.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.release.xcconfig"; sourceTree = "<group>"; };
+		2F46487926B0C83100136DAF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		2F46487B26B0C84700136DAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2F46487D26B0C85400136DAF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2F46488226B0D3B600136DAF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2F46488526B0DB4800136DAF /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		2FA6454126ADC913004E3365 /* PiNNiT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PiNNiT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA6454426ADC913004E3365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FA6454626ADC913004E3365 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +36,6 @@
 		2FA6454D26ADC915004E3365 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FA6455026ADC915004E3365 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2FA6455226ADC915004E3365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2FA6455826ADCB00004E3365 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		58D91AC6E238FEB9E963A6B5 /* Pods-PiNNiT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.debug.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.debug.xcconfig"; sourceTree = "<group>"; };
 		98C7D94370505F4EBF806C3A /* Pods_PiNNiT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiNNiT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -44,6 +52,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F46487F26B0C8B000136DAF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2F46487926B0C83100136DAF /* SignUpViewController.swift */,
+				2F46487B26B0C84700136DAF /* LoginViewController.swift */,
+				2F46487D26B0C85400136DAF /* HomeViewController.swift */,
+				2FA6454826ADC913004E3365 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2F46488426B0DAFA00136DAF /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2F46488526B0DB4800136DAF /* Help.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		2FA6453826ADC913004E3365 = {
 			isa = PBXGroup;
 			children = (
@@ -65,14 +92,15 @@
 		2FA6454326ADC913004E3365 /* PiNNiT */ = {
 			isa = PBXGroup;
 			children = (
+				2F46488426B0DAFA00136DAF /* Helper */,
+				2F46487F26B0C8B000136DAF /* ViewControllers */,
 				2FA6454426ADC913004E3365 /* AppDelegate.swift */,
 				2FA6454626ADC913004E3365 /* SceneDelegate.swift */,
-				2FA6454826ADC913004E3365 /* ViewController.swift */,
 				2FA6454A26ADC913004E3365 /* Main.storyboard */,
 				2FA6454D26ADC915004E3365 /* Assets.xcassets */,
 				2FA6454F26ADC915004E3365 /* LaunchScreen.storyboard */,
 				2FA6455226ADC915004E3365 /* Info.plist */,
-				2FA6455826ADCB00004E3365 /* GoogleService-Info.plist */,
+				2F46488226B0D3B600136DAF /* GoogleService-Info.plist */,
 			);
 			path = PiNNiT;
 			sourceTree = "<group>";
@@ -83,7 +111,6 @@
 				58D91AC6E238FEB9E963A6B5 /* Pods-PiNNiT.debug.xcconfig */,
 				00370486717CFB045847A1C6 /* Pods-PiNNiT.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -155,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA6455126ADC915004E3365 /* LaunchScreen.storyboard in Resources */,
-				2FA6455926ADCB00004E3365 /* GoogleService-Info.plist in Resources */,
+				2F46488326B0D3B600136DAF /* GoogleService-Info.plist in Resources */,
 				2FA6454E26ADC915004E3365 /* Assets.xcassets in Resources */,
 				2FA6454C26ADC913004E3365 /* Main.storyboard in Resources */,
 			);
@@ -210,9 +237,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F46488626B0DB4800136DAF /* Help.swift in Sources */,
 				2FA6454926ADC913004E3365 /* ViewController.swift in Sources */,
 				2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */,
+				2F46487A26B0C83100136DAF /* SignUpViewController.swift in Sources */,
+				2F46487C26B0C84700136DAF /* LoginViewController.swift in Sources */,
 				2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */,
+				2F46487E26B0C85400136DAF /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
