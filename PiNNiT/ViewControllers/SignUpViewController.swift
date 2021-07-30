@@ -7,7 +7,8 @@
 
 import UIKit
 import FirebaseAuth
-import Firebase
+import FirebaseCore
+import FirebaseFirestore
 
 class SignUpViewController: UIViewController {
     
@@ -57,19 +58,40 @@ class SignUpViewController: UIViewController {
             Help.Show(ErrorTF, error!)
         } else {
             
+            let FirstName = FirstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let LastName = LastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let Email = EmailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let Password = PasswordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
             //Create User
-            Auth.auth().createUser(withEmail: <#T##String#>, password: <#T##String#>) { result, err in
+            Auth.auth().createUser(withEmail: Email, password: Password) { result, err in
                 if err != nil {
                     Help.Show(self.ErrorTF, "Error creating user!!!")
                 } else {
+                    let db = Firestore.firestore()
                     
+                    db.collection("Users").addDocument(data: ["First_Name":FirstName, "Last_Name":LastName, "ID":result!.user.uid] ) { error in
+                        
+                        if error != nil
+                        {
+                            Help.Show(self.ErrorTF, "Error saving user!!!")
+                        }
+                    }
+                    self.Transition()
                 }
             }
-            
-            // Transition
-            
-            
         }
+    }
+    
+    
+    func Transition(){
+        
+        Help.Hide(ErrorTF)
+        
+        let LoginVC = storyboard?.instantiateViewController(identifier: "LoginVC") as? LoginViewController
+        
+        view.window?.rootViewController = LoginVC
+        view.window?.makeKeyAndVisible()
     }
     
 

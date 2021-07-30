@@ -30,5 +30,13 @@ class Help {
         let result = emailTest.evaluate(with: testStr)
         return result
     }
+    
+    /*static func Transition(_ GoingVC : String, _ VCC : UIViewController){
+        
+        let GoingVC = storyboard?.instantiateViewController(identifier: GoingVC) as? VCC
+        
+        view.window?.rootViewController = HomeVC
+        view.window?.makeKeyAndVisible()
+    }*/
 
 }

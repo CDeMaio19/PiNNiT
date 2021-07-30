@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -33,8 +34,45 @@ class LoginViewController: UIViewController {
     }
     */
     
-    @IBAction func LoginButtonTapped(_ sender: Any) {
+    func ValidateFields() -> String? {
+        
+        //Check if Blank
+        if  EmailTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            PasswordTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            return "Please fill all fields!!!"
+        }
+        return nil
+        
     }
     
-
+    func TransitionHome(){
+        
+        let HomeVC = storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
+        
+        view.window?.rootViewController = HomeVC
+        view.window?.makeKeyAndVisible()
+    }
+    
+    @IBAction func LoginButtonTapped(_ sender: Any) {
+        
+        let error = ValidateFields()
+        if error != nil {
+            Help.Show(ErrorTF, error!)
+        } else {
+            
+            let Email = EmailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let Password = PasswordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            Auth.auth().signIn(withEmail: Email, password: Password) { result, error in
+                
+                if error != nil{
+                    Help.Show(self.ErrorTF, "Invalid Email or Password")
+                } else {
+                    self.TransitionHome()
+                }
+                
+            }
+        }
+    }
 }
+    

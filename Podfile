@@ -8,5 +8,6 @@ target 'PiNNiT' do
   # Pods for PiNNiT
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
+pod "Firebase/Firestore"
 
 end
