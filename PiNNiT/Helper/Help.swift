@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class Help {
     
@@ -31,6 +33,28 @@ class Help {
         return result
     }
     
+    /*static func GetData() -> String
+    {
+        let db = Firestore.firestore()
+        let UID = getUID()
+        
+        let docRef = db.collection("Users").document(UID).getDocument { Doc, error in
+            
+            if error == nil
+            {
+                if Doc != nil && Doc!.exists
+                {
+                    let DocData = Doc!.data()
+                    let FN = DocData?["FirstName"] as? String ?? ""
+                    
+                    //return FN
+                    
+                }
+            }
+        }
+        return ""
+    }*/
+    
     /*static func Transition(_ GoingVC : String, _ VCC : UIViewController){
         
         let GoingVC = storyboard?.instantiateViewController(identifier: GoingVC) as? VCC
@@ -38,5 +62,54 @@ class Help {
         view.window?.rootViewController = HomeVC
         view.window?.makeKeyAndVisible()
     }*/
+    
+    /*func SetData(){
+        let db = Firestore.firestore()
+        let UID = getUID()
+        
+        let docRef = db.collection("Users").document(UID).getDocument { Doc, error in
+            
+            if error == nil
+            {
+                if Doc != nil && Doc!.exists
+                {
+                    let DocData = Doc!.data()
+                    DocData["FirstName"] as
+                }
+            }
+        }
+    }*/
+    
+    static func getUID() -> String {
+        let user = Auth.auth().currentUser
+        if let user = user {
+          return user.uid
+        }
+        return "Can't fetch user data."
+    }
+    
+    /*static func getData(_ AUser : User) -> User{
+        let db = Firestore.firestore()
+        let UID = getUID()
+        
+        db.collection("Users").document(UID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                AUser.FirstName = document.get("First_Name") as? String ?? ""
+                print(AUser.FirstName)
+            } else {
+                print("Document does not exist")
+
+            }
+        }
+       
+        print("AUser:", AUser.FirstName)
+        return AUser
+        
+        }
+        
+    } */
+
 
 }

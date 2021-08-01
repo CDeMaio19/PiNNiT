@@ -168,9 +168,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljj-dd-032">
-                                <rect key="frame" x="144" y="419" width="126.5" height="58.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="49"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljj-dd-032">
+                                <rect key="frame" x="20" y="64" width="374" height="49"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="41"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -178,10 +178,15 @@
                         <viewLayoutGuide key="safeArea" id="pgs-TG-uvw"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ljj-dd-032" firstAttribute="leading" secondItem="pgs-TG-uvw" secondAttribute="leading" constant="20" id="1ea-I7-FEU"/>
+                            <constraint firstItem="pgs-TG-uvw" firstAttribute="trailing" secondItem="ljj-dd-032" secondAttribute="trailing" constant="20" id="OqO-iw-KEv"/>
                             <constraint firstItem="ljj-dd-032" firstAttribute="centerX" secondItem="3Jv-3s-GHj" secondAttribute="centerX" id="Vyc-1b-esC"/>
-                            <constraint firstItem="ljj-dd-032" firstAttribute="centerY" secondItem="3Jv-3s-GHj" secondAttribute="centerY" id="h02-jL-HPH"/>
+                            <constraint firstItem="ljj-dd-032" firstAttribute="top" secondItem="pgs-TG-uvw" secondAttribute="top" constant="20" id="hri-ga-c25"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="HomeLabel" destination="ljj-dd-032" id="fkv-Rk-ll5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2hm-W7-EX9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

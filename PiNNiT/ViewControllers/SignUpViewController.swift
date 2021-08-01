@@ -70,7 +70,8 @@ class SignUpViewController: UIViewController {
                 } else {
                     let db = Firestore.firestore()
                     
-                    db.collection("Users").addDocument(data: ["First_Name":FirstName, "Last_Name":LastName, "ID":result!.user.uid] ) { error in
+                    //Add Data
+                    db.collection("Users").document(result!.user.uid).setData(["First_Name":FirstName, "Last_Name":LastName, "ID":result!.user.uid, "Email": Email] ) { error in
                         
                         if error != nil
                         {

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class LoginViewController: UIViewController {
     
@@ -69,10 +70,16 @@ class LoginViewController: UIViewController {
                     Help.Show(self.ErrorTF, "Invalid Email or Password")
                 } else {
                     self.TransitionHome()
+                    
                 }
                 
             }
         }
     }
+    
+    
+    
+    
+    
 }
     

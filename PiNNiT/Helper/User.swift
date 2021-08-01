@@ -7,11 +7,23 @@
 
 import UIKit
 
+
 class User{
     
-    var ID = ""
-    var FirstName = ""
-    var LastName = ""
-    var Email = ""
+    var ID : String
+    var FirstName : String
+    var LastName : String
+    var Email : String
+    
+    init() {
+        self.FirstName = ""
+        self.LastName = ""
+        self.ID = ""
+        self.Email = ""
+    }
+    
+    
     
 }
+
+
