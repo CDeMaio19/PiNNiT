@@ -18,12 +18,18 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var PasswordTF: UITextField!
     @IBOutlet weak var SignUpButton: UIButton!
     @IBOutlet weak var ErrorTF: UILabel!
+    @IBOutlet weak var Exit: UIButton!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         Help.Hide(ErrorTF)
+        Utilities.styleTextField(FirstNameTF)
+        Utilities.styleTextField(LastNameTF)
+        Utilities.styleTextField(EmailTF)
+        Utilities.styleTextField(PasswordTF)
+        Utilities.styleFilledButton(SignUpButton)
         // Do any additional setup after loading the view.
     }
     
@@ -49,6 +55,14 @@ class SignUpViewController: UIViewController {
     }
     
     
+    @IBAction func ExitButtonTapped(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+        /*let MainVC = storyboard?.instantiateViewController(identifier: "MainVC") as? ViewController
+        
+        view.window?.rootViewController = MainVC
+        view.window?.makeKeyAndVisible()*/
+    }
     
     @IBAction func SignUpButtonTapped(_ sender: Any) {
         

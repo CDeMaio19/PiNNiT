@@ -15,12 +15,16 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var PasswordTF: UITextField!
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var ErrorTF: UILabel!
+    @IBOutlet weak var Back: UIButton!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         Help.Hide(ErrorTF)
+        Utilities.styleTextField(EmailTF)
+        Utilities.styleTextField(PasswordTF)
+        Utilities.styleFilledButton(LoginButton)
         // Do any additional setup after loading the view.
     }
     
@@ -34,6 +38,9 @@ class LoginViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func BackButtonTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     func ValidateFields() -> String? {
         
