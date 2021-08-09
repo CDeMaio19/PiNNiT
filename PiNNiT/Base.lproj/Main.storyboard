@@ -201,16 +201,53 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGb-Is-3hg">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0Z-gM-zGj">
-                                        <rect key="frame" x="25" y="69" width="16" height="22"/>
-                                        <state key="normal" image="Menu.png"/>
-                                        <connections>
-                                            <action selector="MenuButtonPushed:" destination="zwA-ps-YVb" eventType="touchUpInside" id="jUS-8x-lYi"/>
-                                        </connections>
-                                    </button>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0oT-HK-KSa">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </mapView>
+                                    <stackView opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-gX-c7G">
+                                        <rect key="frame" x="25" y="69" width="364" height="51"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0Z-gM-zGj">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="3QQ-AC-9Av"/>
+                                                </constraints>
+                                                <state key="normal" image="Menu.png"/>
+                                                <connections>
+                                                    <action selector="MenuButtonPushed:" destination="zwA-ps-YVb" eventType="touchUpInside" id="jUS-8x-lYi"/>
+                                                </connections>
+                                            </button>
+                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="qYG-c0-8po">
+                                                <rect key="frame" x="60" y="0.0" width="194" height="51"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmB-y6-Ysk">
+                                                <rect key="frame" x="264" y="0.0" width="50" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="tLt-Up-GL7"/>
+                                                </constraints>
+                                                <state key="normal" image="Nav.png"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7J-7C-Pdm">
+                                                <rect key="frame" x="324" y="0.0" width="40" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="bjI-1E-3hG"/>
+                                                </constraints>
+                                                <state key="normal" image="Pin.png"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="t5x-gX-c7G" secondAttribute="trailing" constant="25" id="5vi-Kp-X5S"/>
+                                    <constraint firstItem="t5x-gX-c7G" firstAttribute="leading" secondItem="oGb-Is-3hg" secondAttribute="leading" constant="25" id="9IY-m2-tg3"/>
+                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Mb2-bf-ybA" appends="YES" id="f7M-uQ-OWI"/>
                                 </connections>
@@ -242,8 +279,7 @@
                             <constraint firstItem="oGb-Is-3hg" firstAttribute="leading" secondItem="pgs-TG-uvw" secondAttribute="leading" id="59a-sk-BSU"/>
                             <constraint firstItem="ofx-0B-Wiq" firstAttribute="leading" secondItem="pgs-TG-uvw" secondAttribute="leading" constant="-150" id="5cc-nJ-uBT"/>
                             <constraint firstItem="oGb-Is-3hg" firstAttribute="top" secondItem="3Jv-3s-GHj" secondAttribute="top" id="8cb-nw-gp1"/>
-                            <constraint firstItem="W0Z-gM-zGj" firstAttribute="leading" secondItem="pgs-TG-uvw" secondAttribute="leading" constant="25" id="Xb5-L8-9yk"/>
-                            <constraint firstItem="pgs-TG-uvw" firstAttribute="top" secondItem="W0Z-gM-zGj" secondAttribute="top" constant="-25" id="XyT-Vx-PG2"/>
+                            <constraint firstItem="t5x-gX-c7G" firstAttribute="top" secondItem="pgs-TG-uvw" secondAttribute="top" constant="25" id="O0Q-Lx-xdx"/>
                             <constraint firstItem="oGb-Is-3hg" firstAttribute="trailing" secondItem="pgs-TG-uvw" secondAttribute="trailing" id="Y5W-Qa-Qsz"/>
                             <constraint firstItem="ofx-0B-Wiq" firstAttribute="top" secondItem="3Jv-3s-GHj" secondAttribute="top" id="hVh-st-aZm"/>
                             <constraint firstAttribute="bottom" secondItem="ofx-0B-Wiq" secondAttribute="bottom" id="kt4-fJ-JEL"/>
@@ -254,8 +290,13 @@
                         <outlet property="BackViewMenu" destination="ofx-0B-Wiq" id="dxk-ms-Jap"/>
                         <outlet property="HomeView" destination="oGb-Is-3hg" id="Ndr-Ai-hCP"/>
                         <outlet property="LeadingConstraintMenu" destination="5cc-nJ-uBT" id="hQ3-Bd-hMt"/>
+                        <outlet property="MapView" destination="0oT-HK-KSa" id="pdi-gN-wB1"/>
                         <outlet property="MenuButton" destination="W0Z-gM-zGj" id="3cF-o3-qvu"/>
                         <outlet property="MenuView" destination="A42-dX-aTP" id="1rp-L3-GnX"/>
+                        <outlet property="NavButton" destination="JmB-y6-Ysk" id="cxU-Td-pSX"/>
+                        <outlet property="PinButton" destination="p7J-7C-Pdm" id="mTT-Vo-qYJ"/>
+                        <outlet property="SearchBar" destination="qYG-c0-8po" id="aCS-wR-ID0"/>
+                        <outlet property="TopMenu" destination="t5x-gX-c7G" id="nRN-Mq-9vt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2hm-W7-EX9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -461,6 +502,8 @@
         <image name="Friends.png" width="16" height="10"/>
         <image name="Map.png" width="390" height="778"/>
         <image name="Menu.png" width="16" height="16"/>
+        <image name="Nav.png" width="47" height="48"/>
+        <image name="Pin.png" width="37" height="37"/>
         <image name="Places.png" width="16" height="16.333333969116211"/>
         <image name="Settings.png" width="16.333333969116211" height="16.333333969116211"/>
         <image name="Title.png" width="330" height="133"/>

@@ -8,9 +8,16 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import MapKit
 
 class HomeViewController: UIViewController, SlideMenuViewControllerDelegate {
-
+    @IBOutlet weak var MapView: MKMapView!
+    @IBOutlet weak var TopMenu: UIStackView!
+    @IBOutlet weak var SearchBar: UISearchBar!
+    @IBOutlet weak var NavButton: UIButton!
+    @IBOutlet weak var PinButton: UIButton!
+    
+    
     @IBOutlet weak var HomeView: UIView!
     @IBOutlet weak var LeadingConstraintMenu: NSLayoutConstraint!
     @IBOutlet weak var BackViewMenu: UIView!
@@ -22,6 +29,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate {
         super.viewDidLoad()
         
         BackViewMenu.isHidden = true
+        TopMenu.layer.cornerRadius = 30
         
         let db = Firestore.firestore()
         let UID = Help.getUID()
@@ -74,7 +82,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate {
                 self.view.layoutIfNeeded()
             }) {(status) in
                 self.BackViewMenu.isHidden = true
-                self.HomeView.alpha = 1
             }
             
         }
@@ -87,7 +94,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate {
         UIView.animate(withDuration: 0.2, animations: {
             self.LeadingConstraintMenu.constant = 10
             self.view.layoutIfNeeded()
-            self.HomeView.alpha = 0.4
         }) { (status) in
             UIView.animate(withDuration: 0.2, animations: {
                 self.LeadingConstraintMenu.constant = 0
