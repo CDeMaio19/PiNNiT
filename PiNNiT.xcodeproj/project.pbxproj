@@ -13,11 +13,15 @@
 		2F46487E26B0C85400136DAF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46487D26B0C85400136DAF /* HomeViewController.swift */; };
 		2F46488326B0D3B600136DAF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F46488226B0D3B600136DAF /* GoogleService-Info.plist */; };
 		2F46488626B0DB4800136DAF /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46488526B0DB4800136DAF /* Help.swift */; };
-		2F8B33B226BB7E7600843E01 /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33AF26BB7E7600843E01 /* Title.png */; };
-		2F8B33B326BB7E7600843E01 /* Title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33B026BB7E7600843E01 /* Title@2x.png */; };
-		2F8B33B426BB7E7600843E01 /* Title@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33B126BB7E7600843E01 /* Title@3x.png */; };
 		2F8B33B626BDD1A900843E01 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B33B526BDD1A900843E01 /* Utilities.swift */; };
-		2F8B33BA26BF66F900843E01 /* Map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33B926BF66F900843E01 /* Map.png */; };
+		2F8B33C726C07A9500843E01 /* Settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33C626C07A9500843E01 /* Settings@3x.png */; };
+		2F8B33C926C07AA400843E01 /* Friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33C826C07AA400843E01 /* Friends@3x.png */; };
+		2F8B33CD26C07C9B00843E01 /* Map@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33CC26C07C9A00843E01 /* Map@3x.png */; };
+		2F8B33CF26C07CD900843E01 /* Title@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33CE26C07CD900843E01 /* Title@3x.png */; };
+		2F8B33D126C07CFB00843E01 /* avatar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33D026C07CFB00843E01 /* avatar@3x.png */; };
+		2F8B33D326C07D0800843E01 /* Places@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33D226C07D0800843E01 /* Places@3x.png */; };
+		2F8B33D526C0836600843E01 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B33D426C0836600843E01 /* SlideMenuViewController.swift */; };
+		2F8B33D726C08F0F00843E01 /* Menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33D626C08F0E00843E01 /* Menu@3x.png */; };
 		2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454426ADC913004E3365 /* AppDelegate.swift */; };
 		2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454626ADC913004E3365 /* SceneDelegate.swift */; };
 		2FA6454926ADC913004E3365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454826ADC913004E3365 /* ViewController.swift */; };
@@ -34,11 +38,15 @@
 		2F46487D26B0C85400136DAF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2F46488226B0D3B600136DAF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F46488526B0DB4800136DAF /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
-		2F8B33AF26BB7E7600843E01 /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Title.png; path = ../../../Title.png; sourceTree = "<group>"; };
-		2F8B33B026BB7E7600843E01 /* Title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Title@2x.png"; path = "../../../Title@2x.png"; sourceTree = "<group>"; };
-		2F8B33B126BB7E7600843E01 /* Title@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Title@3x.png"; path = "../../../Title@3x.png"; sourceTree = "<group>"; };
 		2F8B33B526BDD1A900843E01 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../../../../../Downloads/CustomLoginDemo/CustomLoginDemo/Helpers/Utilities.swift; sourceTree = "<group>"; };
-		2F8B33B926BF66F900843E01 /* Map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Map.png; path = ../../../Map.png; sourceTree = "<group>"; };
+		2F8B33C626C07A9500843E01 /* Settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Settings@3x.png"; path = "../../../../Settings@3x.png"; sourceTree = "<group>"; };
+		2F8B33C826C07AA400843E01 /* Friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Friends@3x.png"; path = "../../../../Friends@3x.png"; sourceTree = "<group>"; };
+		2F8B33CC26C07C9A00843E01 /* Map@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Map@3x.png"; path = "../../../../Map@3x.png"; sourceTree = "<group>"; };
+		2F8B33CE26C07CD900843E01 /* Title@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Title@3x.png"; sourceTree = "<group>"; };
+		2F8B33D026C07CFB00843E01 /* avatar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar@3x.png"; sourceTree = "<group>"; };
+		2F8B33D226C07D0800843E01 /* Places@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Places@3x.png"; sourceTree = "<group>"; };
+		2F8B33D426C0836600843E01 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
+		2F8B33D626C08F0E00843E01 /* Menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Menu@3x.png"; path = "../../../../Menu@3x.png"; sourceTree = "<group>"; };
 		2FA6454126ADC913004E3365 /* PiNNiT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PiNNiT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA6454426ADC913004E3365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FA6454626ADC913004E3365 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +79,7 @@
 				2F46487B26B0C84700136DAF /* LoginViewController.swift */,
 				2F46487D26B0C85400136DAF /* HomeViewController.swift */,
 				2FA6454826ADC913004E3365 /* ViewController.swift */,
+				2F8B33D426C0836600843E01 /* SlideMenuViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -83,6 +92,20 @@
 				2F8B33B526BDD1A900843E01 /* Utilities.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		2F8B33BF26C07A0C00843E01 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				2F8B33CC26C07C9A00843E01 /* Map@3x.png */,
+				2F8B33CE26C07CD900843E01 /* Title@3x.png */,
+				2F8B33D026C07CFB00843E01 /* avatar@3x.png */,
+				2F8B33D226C07D0800843E01 /* Places@3x.png */,
+				2F8B33C626C07A9500843E01 /* Settings@3x.png */,
+				2F8B33C826C07AA400843E01 /* Friends@3x.png */,
+				2F8B33D626C08F0E00843E01 /* Menu@3x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		2FA6453826ADC913004E3365 = {
@@ -106,6 +129,7 @@
 		2FA6454326ADC913004E3365 /* PiNNiT */ = {
 			isa = PBXGroup;
 			children = (
+				2F8B33BF26C07A0C00843E01 /* Images */,
 				2F46488426B0DAFA00136DAF /* Helper */,
 				2F46487F26B0C8B000136DAF /* ViewControllers */,
 				2FA6454426ADC913004E3365 /* AppDelegate.swift */,
@@ -115,10 +139,6 @@
 				2FA6454F26ADC915004E3365 /* LaunchScreen.storyboard */,
 				2FA6455226ADC915004E3365 /* Info.plist */,
 				2F46488226B0D3B600136DAF /* GoogleService-Info.plist */,
-				2F8B33B926BF66F900843E01 /* Map.png */,
-				2F8B33AF26BB7E7600843E01 /* Title.png */,
-				2F8B33B026BB7E7600843E01 /* Title@2x.png */,
-				2F8B33B126BB7E7600843E01 /* Title@3x.png */,
 			);
 			path = PiNNiT;
 			sourceTree = "<group>";
@@ -199,14 +219,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F8B33BA26BF66F900843E01 /* Map.png in Resources */,
+				2F8B33C726C07A9500843E01 /* Settings@3x.png in Resources */,
 				2FA6455126ADC915004E3365 /* LaunchScreen.storyboard in Resources */,
-				2F8B33B226BB7E7600843E01 /* Title.png in Resources */,
 				2F46488326B0D3B600136DAF /* GoogleService-Info.plist in Resources */,
+				2F8B33D726C08F0F00843E01 /* Menu@3x.png in Resources */,
+				2F8B33D126C07CFB00843E01 /* avatar@3x.png in Resources */,
+				2F8B33C926C07AA400843E01 /* Friends@3x.png in Resources */,
+				2F8B33CF26C07CD900843E01 /* Title@3x.png in Resources */,
 				2FA6454E26ADC915004E3365 /* Assets.xcassets in Resources */,
+				2F8B33CD26C07C9B00843E01 /* Map@3x.png in Resources */,
 				2FA6454C26ADC913004E3365 /* Main.storyboard in Resources */,
-				2F8B33B326BB7E7600843E01 /* Title@2x.png in Resources */,
-				2F8B33B426BB7E7600843E01 /* Title@3x.png in Resources */,
+				2F8B33D326C07D0800843E01 /* Places@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +287,7 @@
 				2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */,
 				2F46487A26B0C83100136DAF /* SignUpViewController.swift in Sources */,
 				2F27855626B385C7002ED473 /* User.swift in Sources */,
+				2F8B33D526C0836600843E01 /* SlideMenuViewController.swift in Sources */,
 				2F46487C26B0C84700136DAF /* LoginViewController.swift in Sources */,
 				2F8B33B626BDD1A900843E01 /* Utilities.swift in Sources */,
 				2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */,
