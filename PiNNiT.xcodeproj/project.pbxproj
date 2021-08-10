@@ -16,7 +16,6 @@
 		2F8B33B626BDD1A900843E01 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B33B526BDD1A900843E01 /* Utilities.swift */; };
 		2F8B33C726C07A9500843E01 /* Settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33C626C07A9500843E01 /* Settings@3x.png */; };
 		2F8B33C926C07AA400843E01 /* Friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33C826C07AA400843E01 /* Friends@3x.png */; };
-		2F8B33CD26C07C9B00843E01 /* Map@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33CC26C07C9A00843E01 /* Map@3x.png */; };
 		2F8B33CF26C07CD900843E01 /* Title@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33CE26C07CD900843E01 /* Title@3x.png */; };
 		2F8B33D126C07CFB00843E01 /* avatar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33D026C07CFB00843E01 /* avatar@3x.png */; };
 		2F8B33D326C07D0800843E01 /* Places@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33D226C07D0800843E01 /* Places@3x.png */; };
@@ -24,6 +23,13 @@
 		2F8B33D726C08F0F00843E01 /* Menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33D626C08F0E00843E01 /* Menu@3x.png */; };
 		2F8B33D926C0B20600843E01 /* Pin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33D826C0B20600843E01 /* Pin@3x.png */; };
 		2F8B33DB26C0B21700843E01 /* Nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33DA26C0B21700843E01 /* Nav.png */; };
+		2F8B33DD26C0D14400843E01 /* World View@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33DC26C0D14400843E01 /* World View@3x.png */; };
+		2F8B33DF26C0D14E00843E01 /* Friend View@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33DE26C0D14D00843E01 /* Friend View@3x.png */; };
+		2F8B33E126C0D15500843E01 /* My View@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E026C0D15500843E01 /* My View@3x.png */; };
+		2F8B33E326C1D91E00843E01 /* MapV@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E226C1D91E00843E01 /* MapV@3x.png */; };
+		2F8B33E526C1DA6B00843E01 /* FriendsV@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E426C1DA6B00843E01 /* FriendsV@3x.png */; };
+		2F8B33E726C1DA7700843E01 /* World@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E626C1DA7700843E01 /* World@3x.png */; };
+		2F8B33E926C1DB3C00843E01 /* Map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E826C1DB3C00843E01 /* Map.png */; };
 		2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454426ADC913004E3365 /* AppDelegate.swift */; };
 		2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454626ADC913004E3365 /* SceneDelegate.swift */; };
 		2FA6454926ADC913004E3365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454826ADC913004E3365 /* ViewController.swift */; };
@@ -43,7 +49,6 @@
 		2F8B33B526BDD1A900843E01 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../../../../../Downloads/CustomLoginDemo/CustomLoginDemo/Helpers/Utilities.swift; sourceTree = "<group>"; };
 		2F8B33C626C07A9500843E01 /* Settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Settings@3x.png"; path = "../../../../Settings@3x.png"; sourceTree = "<group>"; };
 		2F8B33C826C07AA400843E01 /* Friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Friends@3x.png"; path = "../../../../Friends@3x.png"; sourceTree = "<group>"; };
-		2F8B33CC26C07C9A00843E01 /* Map@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Map@3x.png"; path = "../../../../Map@3x.png"; sourceTree = "<group>"; };
 		2F8B33CE26C07CD900843E01 /* Title@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Title@3x.png"; sourceTree = "<group>"; };
 		2F8B33D026C07CFB00843E01 /* avatar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar@3x.png"; sourceTree = "<group>"; };
 		2F8B33D226C07D0800843E01 /* Places@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Places@3x.png"; sourceTree = "<group>"; };
@@ -51,6 +56,13 @@
 		2F8B33D626C08F0E00843E01 /* Menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Menu@3x.png"; path = "../../../../Menu@3x.png"; sourceTree = "<group>"; };
 		2F8B33D826C0B20600843E01 /* Pin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pin@3x.png"; path = "../../../../Pin@3x.png"; sourceTree = "<group>"; };
 		2F8B33DA26C0B21700843E01 /* Nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Nav.png; path = ../../../../Nav.png; sourceTree = "<group>"; };
+		2F8B33DC26C0D14400843E01 /* World View@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "World View@3x.png"; path = "../../../../World View@3x.png"; sourceTree = "<group>"; };
+		2F8B33DE26C0D14D00843E01 /* Friend View@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Friend View@3x.png"; path = "../../../../Friend View@3x.png"; sourceTree = "<group>"; };
+		2F8B33E026C0D15500843E01 /* My View@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "My View@3x.png"; path = "../../../../My View@3x.png"; sourceTree = "<group>"; };
+		2F8B33E226C1D91E00843E01 /* MapV@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MapV@3x.png"; path = "../../../../MapV@3x.png"; sourceTree = "<group>"; };
+		2F8B33E426C1DA6B00843E01 /* FriendsV@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FriendsV@3x.png"; path = "../../../../FriendsV@3x.png"; sourceTree = "<group>"; };
+		2F8B33E626C1DA7700843E01 /* World@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "World@3x.png"; path = "../../../../World@3x.png"; sourceTree = "<group>"; };
+		2F8B33E826C1DB3C00843E01 /* Map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map.png; sourceTree = "<group>"; };
 		2FA6454126ADC913004E3365 /* PiNNiT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PiNNiT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA6454426ADC913004E3365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FA6454626ADC913004E3365 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,14 +114,20 @@
 			isa = PBXGroup;
 			children = (
 				2F8B33DA26C0B21700843E01 /* Nav.png */,
+				2F8B33E826C1DB3C00843E01 /* Map.png */,
 				2F8B33D826C0B20600843E01 /* Pin@3x.png */,
-				2F8B33CC26C07C9A00843E01 /* Map@3x.png */,
+				2F8B33E626C1DA7700843E01 /* World@3x.png */,
+				2F8B33E426C1DA6B00843E01 /* FriendsV@3x.png */,
 				2F8B33CE26C07CD900843E01 /* Title@3x.png */,
 				2F8B33D026C07CFB00843E01 /* avatar@3x.png */,
 				2F8B33D226C07D0800843E01 /* Places@3x.png */,
 				2F8B33C626C07A9500843E01 /* Settings@3x.png */,
 				2F8B33C826C07AA400843E01 /* Friends@3x.png */,
 				2F8B33D626C08F0E00843E01 /* Menu@3x.png */,
+				2F8B33DC26C0D14400843E01 /* World View@3x.png */,
+				2F8B33DE26C0D14D00843E01 /* Friend View@3x.png */,
+				2F8B33E026C0D15500843E01 /* My View@3x.png */,
+				2F8B33E226C1D91E00843E01 /* MapV@3x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -227,15 +245,21 @@
 			files = (
 				2F8B33C726C07A9500843E01 /* Settings@3x.png in Resources */,
 				2FA6455126ADC915004E3365 /* LaunchScreen.storyboard in Resources */,
+				2F8B33E726C1DA7700843E01 /* World@3x.png in Resources */,
+				2F8B33DF26C0D14E00843E01 /* Friend View@3x.png in Resources */,
 				2F8B33DB26C0B21700843E01 /* Nav.png in Resources */,
 				2F46488326B0D3B600136DAF /* GoogleService-Info.plist in Resources */,
 				2F8B33D726C08F0F00843E01 /* Menu@3x.png in Resources */,
 				2F8B33D126C07CFB00843E01 /* avatar@3x.png in Resources */,
 				2F8B33C926C07AA400843E01 /* Friends@3x.png in Resources */,
+				2F8B33E326C1D91E00843E01 /* MapV@3x.png in Resources */,
 				2F8B33CF26C07CD900843E01 /* Title@3x.png in Resources */,
+				2F8B33E926C1DB3C00843E01 /* Map.png in Resources */,
+				2F8B33E526C1DA6B00843E01 /* FriendsV@3x.png in Resources */,
+				2F8B33DD26C0D14400843E01 /* World View@3x.png in Resources */,
 				2F8B33D926C0B20600843E01 /* Pin@3x.png in Resources */,
 				2FA6454E26ADC915004E3365 /* Assets.xcassets in Resources */,
-				2F8B33CD26C07C9B00843E01 /* Map@3x.png in Resources */,
+				2F8B33E126C0D15500843E01 /* My View@3x.png in Resources */,
 				2FA6454C26ADC913004E3365 /* Main.storyboard in Resources */,
 				2F8B33D326C07D0800843E01 /* Places@3x.png in Resources */,
 			);

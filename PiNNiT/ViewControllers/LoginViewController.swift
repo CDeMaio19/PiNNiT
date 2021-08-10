@@ -63,7 +63,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func LoginButtonTapped(_ sender: Any) {
         
-        let error = ValidateFields()
+        //Login Need!!!!
+        /*let error = ValidateFields()
         if error != nil {
             Help.Show(ErrorTF, error!)
         } else {
@@ -81,7 +82,14 @@ class LoginViewController: UIViewController {
                 }
                 
             }
-        }
+        }*/
+        
+        //Skip Login
+        let HomeVC = storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
+        
+        view.window?.rootViewController = HomeVC
+        view.window?.makeKeyAndVisible()
+        //
     }
     
     

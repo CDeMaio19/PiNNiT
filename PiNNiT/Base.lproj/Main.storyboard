@@ -205,7 +205,23 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </mapView>
-                                    <stackView opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-gX-c7G">
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZOf-Nh-GLE">
+                                        <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                    </imageView>
+                                    <stackView hidden="YES" opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I3h-lG-AX2">
+                                        <rect key="frame" x="346" y="69" width="40" height="51"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3d-1X-aPv">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="51"/>
+                                                <color key="tintColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" image="checkmark" catalog="system">
+                                                    <color key="titleColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                    <stackView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-gX-c7G">
                                         <rect key="frame" x="25" y="69" width="364" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0Z-gM-zGj">
@@ -222,6 +238,7 @@
                                                 <rect key="frame" x="60" y="0.0" width="194" height="51"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmB-y6-Ysk">
@@ -230,6 +247,9 @@
                                                     <constraint firstAttribute="width" constant="50" id="tLt-Up-GL7"/>
                                                 </constraints>
                                                 <state key="normal" image="Nav.png"/>
+                                                <connections>
+                                                    <action selector="NavButtonClicked:" destination="zwA-ps-YVb" eventType="touchUpInside" id="fov-dJ-x0k"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7J-7C-Pdm">
                                                 <rect key="frame" x="324" y="0.0" width="40" height="51"/>
@@ -237,16 +257,63 @@
                                                     <constraint firstAttribute="width" constant="40" id="bjI-1E-3hG"/>
                                                 </constraints>
                                                 <state key="normal" image="Pin.png"/>
+                                                <connections>
+                                                    <action selector="PinButtonClicked:" destination="zwA-ps-YVb" eventType="touchUpInside" id="KwH-xs-S0a"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                    <stackView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sOP-Vz-daa">
+                                        <rect key="frame" x="65" y="821" width="284" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNC-6t-ZQL">
+                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" image="FriendsV.png"/>
+                                                <connections>
+                                                    <action selector="FreindsButtonViewPressed:" destination="zwA-ps-YVb" eventType="touchUpInside" id="7oy-Oe-IMB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DK-QG-Uvv">
+                                                <rect key="frame" x="94.5" y="0.0" width="95" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="MapV.png"/>
+                                                <connections>
+                                                    <action selector="MyButtonViewPressed:" destination="zwA-ps-YVb" eventType="touchUpInside" id="M5H-MN-jfK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bs-Zc-q8A">
+                                                <rect key="frame" x="189.5" y="0.0" width="94.5" height="50"/>
+                                                <state key="normal" image="World.png">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="WorldButtonViewPressed:" destination="zwA-ps-YVb" eventType="touchUpInside" id="wgI-Ml-xDo"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="sPc-Tg-vyz"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="sOP-Vz-daa" firstAttribute="leading" secondItem="oGb-Is-3hg" secondAttribute="leading" constant="65" id="2HI-GE-Xcd"/>
                                     <constraint firstAttribute="trailing" secondItem="t5x-gX-c7G" secondAttribute="trailing" constant="25" id="5vi-Kp-X5S"/>
                                     <constraint firstItem="t5x-gX-c7G" firstAttribute="leading" secondItem="oGb-Is-3hg" secondAttribute="leading" constant="25" id="9IY-m2-tg3"/>
+                                    <constraint firstItem="ZOf-Nh-GLE" firstAttribute="centerX" secondItem="oGb-Is-3hg" secondAttribute="centerX" id="Djm-1S-LAP"/>
+                                    <constraint firstItem="ZOf-Nh-GLE" firstAttribute="centerY" secondItem="oGb-Is-3hg" secondAttribute="centerY" id="FKV-yF-PJC"/>
+                                    <constraint firstItem="I3h-lG-AX2" firstAttribute="top" secondItem="t5x-gX-c7G" secondAttribute="top" id="MA5-Jy-BVH"/>
+                                    <constraint firstAttribute="bottom" secondItem="sOP-Vz-daa" secondAttribute="bottom" constant="25" id="TNg-Dh-rbK"/>
+                                    <constraint firstAttribute="trailing" secondItem="sOP-Vz-daa" secondAttribute="trailing" constant="65" id="XiF-HB-kes"/>
+                                    <constraint firstItem="I3h-lG-AX2" firstAttribute="width" secondItem="p7J-7C-Pdm" secondAttribute="width" id="d66-Es-HdE"/>
+                                    <constraint firstItem="I3h-lG-AX2" firstAttribute="centerX" secondItem="p7J-7C-Pdm" secondAttribute="centerX" constant="-3" id="xbd-xX-ANG"/>
+                                    <constraint firstItem="I3h-lG-AX2" firstAttribute="height" secondItem="t5x-gX-c7G" secondAttribute="height" id="yWV-c9-BkN"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Mb2-bf-ybA" appends="YES" id="f7M-uQ-OWI"/>
@@ -288,15 +355,22 @@
                     </view>
                     <connections>
                         <outlet property="BackViewMenu" destination="ofx-0B-Wiq" id="dxk-ms-Jap"/>
+                        <outlet property="BottomNav" destination="sOP-Vz-daa" id="YvW-nc-lhw"/>
+                        <outlet property="CenterPin" destination="ZOf-Nh-GLE" id="2vs-ia-NOJ"/>
+                        <outlet property="FriendsPinButton" destination="XNC-6t-ZQL" id="Goq-g4-6Rv"/>
                         <outlet property="HomeView" destination="oGb-Is-3hg" id="Ndr-Ai-hCP"/>
                         <outlet property="LeadingConstraintMenu" destination="5cc-nJ-uBT" id="hQ3-Bd-hMt"/>
                         <outlet property="MapView" destination="0oT-HK-KSa" id="pdi-gN-wB1"/>
                         <outlet property="MenuButton" destination="W0Z-gM-zGj" id="3cF-o3-qvu"/>
                         <outlet property="MenuView" destination="A42-dX-aTP" id="1rp-L3-GnX"/>
+                        <outlet property="MyPinsButton" destination="9DK-QG-Uvv" id="QfC-kn-qGQ"/>
                         <outlet property="NavButton" destination="JmB-y6-Ysk" id="cxU-Td-pSX"/>
                         <outlet property="PinButton" destination="p7J-7C-Pdm" id="mTT-Vo-qYJ"/>
+                        <outlet property="PinConfirmView" destination="I3h-lG-AX2" id="cdZ-qi-Ow9"/>
                         <outlet property="SearchBar" destination="qYG-c0-8po" id="aCS-wR-ID0"/>
                         <outlet property="TopMenu" destination="t5x-gX-c7G" id="nRN-Mq-9vt"/>
+                        <outlet property="TopPinConfirmConstraint" destination="MA5-Jy-BVH" id="Bja-PE-eyR"/>
+                        <outlet property="WorldPinsButton" destination="9bs-Zc-q8A" id="krW-gl-j3i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2hm-W7-EX9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -473,6 +547,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="RcR-hZ-dDW"/>
                         <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QmM-st-LOp" secondAttribute="trailing" id="4cF-8U-1ZX"/>
@@ -500,14 +575,18 @@
     </scenes>
     <resources>
         <image name="Friends.png" width="16" height="10"/>
+        <image name="FriendsV.png" width="43" height="43"/>
         <image name="Map.png" width="390" height="778"/>
+        <image name="MapV.png" width="43" height="43"/>
         <image name="Menu.png" width="16" height="16"/>
         <image name="Nav.png" width="47" height="48"/>
         <image name="Pin.png" width="37" height="37"/>
         <image name="Places.png" width="16" height="16.333333969116211"/>
         <image name="Settings.png" width="16.333333969116211" height="16.333333969116211"/>
         <image name="Title.png" width="330" height="133"/>
+        <image name="World.png" width="43" height="43"/>
         <image name="avatar.png" width="25" height="25"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemRedColor">
