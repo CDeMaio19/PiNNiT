@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var EmailTF: UITextField!
     @IBOutlet weak var PasswordTF: UITextField!
@@ -61,6 +61,13 @@ class LoginViewController: UIViewController {
         view.window?.makeKeyAndVisible()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     @IBAction func LoginButtonTapped(_ sender: Any) {
         
         //Login Need!!!!

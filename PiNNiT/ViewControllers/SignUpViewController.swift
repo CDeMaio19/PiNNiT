@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var FirstNameTF: UITextField!
     @IBOutlet weak var LastNameTF: UITextField!
@@ -109,5 +109,12 @@ class SignUpViewController: UIViewController {
         view.window?.makeKeyAndVisible()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 }

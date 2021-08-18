@@ -10,8 +10,23 @@ import FirebaseAuth
 import FirebaseFirestore
 import MapKit
 import CoreLocation
+import BLTNBoard
 
-class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
+private let reuseIdentifier = "DropDownCell"
+private let PinTags = ["House", "Resturant", "Park", "Point of Intrest"] //Add More
+
+class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
+    
+    private lazy var boardManager: BLTNItemManager = {
+        let item = BLTNPageItem(title: "Turn On Location Services!")
+        item.image = UIImage(named: "Nav.png")
+        item.descriptionText = "We need location services to provide you with the best user experience!"
+        item.requiresCloseButton = false
+        item.isDismissable = false
+        
+        return BLTNItemManager(rootItem: item)
+    } ()
+    
     @IBOutlet weak var MapView: MKMapView!
     @IBOutlet weak var TopMenu: UIStackView!
     @IBOutlet weak var SearchBar: UISearchBar!
@@ -37,10 +52,29 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     var FPB = 0
     var WPB = 0
     let locationManager = CLLocationManager()
+    var CenterPoint = CLLocationCoordinate2D()
+    @IBOutlet weak var CheckButton: UIButton!
+    
+    //Pin Confirm
+    @IBOutlet var BlurView: UIVisualEffectView!
+    @IBOutlet var PinView: UIView!
+    @IBOutlet weak var PinNameET: UITextField!
+    @IBOutlet weak var PinAddressET: UITextField!
+    @IBOutlet weak var TagButton: UIButton!
+    @IBOutlet weak var PinErrorLabel: UILabel!
+    var tableView = UITableView()
+    @IBOutlet weak var PinTopView: UIStackView!
+    var showMenu = false
+    var PinTag = "Tag"
+    var MyPins = [Pin()]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        BlurView.bounds = self.view.bounds
+        
+        checkLocationAuthorization()
         checkLocationServices()
         
         MapView.delegate = self
@@ -69,7 +103,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
                 print("Document does not exist")
             }
         }
-        
         
         
         
@@ -104,9 +137,9 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             }) {(status) in
                 self.BackViewMenu.isHidden = true
             }
-            
+            self.HomeView.alpha = 1
         }
-        self.HomeView.alpha = 1
+       
         
     }
     
@@ -189,10 +222,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
                 self.TopPinConfirmConstraint.constant = 61
                 self.view.layoutIfNeeded()
             }) {(status) in
-                
-                
             }
-            
         }
     }
     func HideConfirmButtons(){
@@ -206,9 +236,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             }) {(status) in
                 self.PinConfirmView.isHidden = true
             }
-            
         }
-        
     }
     @IBAction func NavButtonClicked(_ sender: Any) {
         mapIsReady()
@@ -228,7 +256,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         } else {
             HideConfirmButtons()
         }
-        
     }
     func centerOnUserLocation(){
         if let location = locationManager.location?.coordinate {
@@ -240,19 +267,27 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
             mapIsReady()
+            if (boardManager.isShowingBulletin){
+            boardManager.dismissBulletin()
+            }
             break
         case .denied:
-            //Turn On Permissions
+            boardManager.showBulletin(above: self)
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             break
         case .restricted:
-            //Turn On Permissions
+            boardManager.showBulletin(above: self)
             break
         case .authorizedAlways:
             mapIsReady()
+            if (boardManager.isShowingBulletin){
+            boardManager.dismissBulletin()
+            }
             break
+        default:
+            boardManager.showBulletin(above: self)
         }
     }
     
@@ -282,20 +317,195 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
-    
-    
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
+        var annotationView = MapView.dequeueReusableAnnotationView(withIdentifier: "CustomPin")
+        
+        if annotationView == nil{
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "CustomPin")
+            annotationView?.canShowCallout = true
+        }
+        else{
+            annotationView?.annotation = annotation
+        }
+        annotationView?.image = UIImage(named: "Pin@3x.png")
+        return annotationView
     }
-    */
+    @IBAction func CheckButtonClicked(_ sender: Any) {
+        CenterPoint = MapView.centerCoordinate
+        HideConfirmButtons()
+        CenterPin.isHidden = true
+        animateIn(desiredView: BlurView)
+        animateIn(desiredView: PinView)
+        let centerCor = getCenterLocation(for: MapView)
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(centerCor) { [weak self] (placemarks, error) in
+            guard let self = self else {return}
+            
+            if let _ = error {
+                return
+            }
+            
+            guard let placemark = placemarks?.first else {
+                return
+            }
+            let streetNumber = placemark.subThoroughfare ?? ""
+            let streetName = placemark.thoroughfare ?? ""
+            
+            self.PinAddressET.text = streetNumber+" "+streetName
+        }
+        
+        
+    }
+    func AddPin(_ Cordinates:CLLocationCoordinate2D){
+        let pin = MKPointAnnotation()
+        pin.coordinate = Cordinates
+        pin.title = PinNameET.text
+        pin.subtitle = PinAddressET.text
+        MapView.addAnnotation(pin)
+        MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag))
+    }
+    
+    //Pin Screen
+    @IBAction func PinCheckButtonIsClicked(_ sender: Any) {
+        if (PinNameET.text != "" && PinAddressET.text != " " && PinTag != "Tag")
+        {
+            AddPin(CenterPoint)
+            animateOut(desiredView: BlurView)
+            animateOut(desiredView: PinView)
+            PinErrorLabel.text = ""
+        }
+        else
+        {
+            PinErrorLabel.text = "Please Fill All Fields"
+        }
+        
+    }
+    @IBAction func PinExitButtonIsClicked(_ sender: Any) {
+        animateOut(desiredView: BlurView)
+        animateOut(desiredView: PinView)
+        PinErrorLabel.text = ""
+        PinNameET.text = ""
+        PinTag = "Tag"
+        TagButton.setTitle(PinTag, for: .normal)
+        TagButton.setTitleColor(UIColor.init(red: 189/255, green: 249/255, blue: 254/255, alpha: 1), for: .normal)
+    }
+    func animateIn(desiredView: UIView){
+        let backroundView = self.view!
+        backroundView.addSubview(desiredView)
+        
+        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        desiredView.alpha = 0
+        desiredView.center = backroundView.center
+        desiredView.layer.cornerRadius = 50
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            desiredView.alpha = 0.9
+        })
+        
+    }
+    func animateOut(desiredView: UIView){
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            desiredView.alpha = 0
+        }, completion: {_ in
+            desiredView.removeFromSuperview()
+        })
+        
+    }
+    @IBAction func TagButtonClicked(_ sender: Any) {
+        SetUpTableView()
+        handleDropDown()
+    }
+    
+    //DropDown
+    func SetUpTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.layer.cornerRadius = 0
+        tableView.isScrollEnabled = true
+        tableView.backgroundColor = UIColor.init(red: 0/255, green: 158/255, blue: 171/255, alpha: 1)
+        
+        tableView.register(DropDownCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        view.addSubview(tableView)
+        
+        tableView.topAnchor.constraint(equalTo: TagButton.bottomAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: PinTopView.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: PinTopView.rightAnchor).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+    }
+    
+    func handleDropDown(){
+        showMenu = !showMenu
+        var indexPaths = [IndexPath]()
+        var i = 0
+        PinTags.forEach { (Tag) in
+            let indexPath = IndexPath(row: i, section: 0)
+            indexPaths.append(indexPath)
+            i=i+1
+        }
+        if showMenu {
+            tableView.insertRows(at: indexPaths, with: .fade)
+            animateinDropDown()
+            
+        } else{
+            tableView.deleteRows(at: indexPaths, with: .fade)
+            animateoutDropDown()
+        }
+    }
+    
+    func animateinDropDown(){
+        self.tableView.isHidden = false
+    }
+    func animateoutDropDown(){
+        self.tableView.isHidden = true
+        TagButton.setTitle(PinTag, for: .normal)
+        TagButton.setTitleColor(.white, for: .normal)
+    }
+    func getCenterLocation(for mapView: MKMapView) ->CLLocation {
+        let lat = mapView.centerCoordinate.latitude
+        let lon = mapView.centerCoordinate.longitude
+        
+        return CLLocation(latitude: lat, longitude: lon)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    
+    
+    
+    
 
+
+}
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return showMenu ? PinTags.count : 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! DropDownCell
+        cell.backgroundColor = UIColor.init(red: 0/255, green: 158/255, blue: 171/255, alpha: 1)
+        cell.TitleLabel.text = PinTags[indexPath.row].description
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        PinTag = PinTags[indexPath.row].description
+        TagButton.sendActions(for: .touchUpInside)
+    }
+    
+    
 }

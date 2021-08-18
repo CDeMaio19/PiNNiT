@@ -30,6 +30,8 @@
 		2F8B33E526C1DA6B00843E01 /* FriendsV@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E426C1DA6B00843E01 /* FriendsV@3x.png */; };
 		2F8B33E726C1DA7700843E01 /* World@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E626C1DA7700843E01 /* World@3x.png */; };
 		2F8B33E926C1DB3C00843E01 /* Map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F8B33E826C1DB3C00843E01 /* Map.png */; };
+		2F8B33EB26C32E9500843E01 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B33EA26C32E9500843E01 /* Pin.swift */; };
+		2F8B33ED26C7071300843E01 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B33EC26C7071300843E01 /* DropDownCell.swift */; };
 		2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454426ADC913004E3365 /* AppDelegate.swift */; };
 		2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454626ADC913004E3365 /* SceneDelegate.swift */; };
 		2FA6454926ADC913004E3365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA6454826ADC913004E3365 /* ViewController.swift */; };
@@ -63,6 +65,8 @@
 		2F8B33E426C1DA6B00843E01 /* FriendsV@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FriendsV@3x.png"; path = "../../../../FriendsV@3x.png"; sourceTree = "<group>"; };
 		2F8B33E626C1DA7700843E01 /* World@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "World@3x.png"; path = "../../../../World@3x.png"; sourceTree = "<group>"; };
 		2F8B33E826C1DB3C00843E01 /* Map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map.png; sourceTree = "<group>"; };
+		2F8B33EA26C32E9500843E01 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		2F8B33EC26C7071300843E01 /* DropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		2FA6454126ADC913004E3365 /* PiNNiT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PiNNiT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA6454426ADC913004E3365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FA6454626ADC913004E3365 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 				2F46488526B0DB4800136DAF /* Help.swift */,
 				2F27855526B385C7002ED473 /* User.swift */,
 				2F8B33B526BDD1A900843E01 /* Utilities.swift */,
+				2F8B33EA26C32E9500843E01 /* Pin.swift */,
+				2F8B33EC26C7071300843E01 /* DropDownCell.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F46488626B0DB4800136DAF /* Help.swift in Sources */,
+				2F8B33EB26C32E9500843E01 /* Pin.swift in Sources */,
 				2FA6454926ADC913004E3365 /* ViewController.swift in Sources */,
 				2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */,
 				2F46487A26B0C83100136DAF /* SignUpViewController.swift in Sources */,
@@ -323,6 +330,7 @@
 				2F46487C26B0C84700136DAF /* LoginViewController.swift in Sources */,
 				2F8B33B626BDD1A900843E01 /* Utilities.swift in Sources */,
 				2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */,
+				2F8B33ED26C7071300843E01 /* DropDownCell.swift in Sources */,
 				2F46487E26B0C85400136DAF /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

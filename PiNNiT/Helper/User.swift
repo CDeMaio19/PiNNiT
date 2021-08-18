@@ -14,12 +14,15 @@ class User{
     var FirstName : String
     var LastName : String
     var Email : String
+    var Pins : Array<Pin>
     
     init() {
         self.FirstName = ""
         self.LastName = ""
         self.ID = ""
         self.Email = ""
+        self.Pins = Array<Pin>()
+        
     }
     
     
