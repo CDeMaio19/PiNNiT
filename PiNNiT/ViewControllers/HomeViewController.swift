@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseCore
 import MapKit
 import CoreLocation
 import BLTNBoard
@@ -67,6 +68,8 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     var showMenu = false
     var PinTag = "Tag"
     var MyPins = [Pin()]
+    var PinCount = 0
+    @IBOutlet weak var ExitButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -93,7 +96,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         db.collection("Users").document(UID).getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
+                //print("Document data: \(dataDescription)")
                 self.CurUsr.FirstName = document.get("First_Name") as? String ?? ""
                 self.CurUsr.LastName = document.get("Last_Name") as? String ?? ""
                 self.CurUsr.ID = document.get("ID") as? String ?? ""
@@ -354,8 +357,9 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             }
             let streetNumber = placemark.subThoroughfare ?? ""
             let streetName = placemark.thoroughfare ?? ""
+            let town = placemark.locality ?? ""
             
-            self.PinAddressET.text = streetNumber+" "+streetName
+            self.PinAddressET.text = streetNumber+" "+streetName+", "+town
         }
         
         
@@ -366,17 +370,21 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         pin.title = PinNameET.text
         pin.subtitle = PinAddressET.text
         MapView.addAnnotation(pin)
-        MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag))
+        MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag, privacy: true, Id: CurUsr.ID))
+        print("PinCount: ",PinCount)
     }
-    
     //Pin Screen
     @IBAction func PinCheckButtonIsClicked(_ sender: Any) {
-        if (PinNameET.text != "" && PinAddressET.text != " " && PinTag != "Tag")
+        if (PinNameET.text != "" && PinAddressET.text != "  " && PinTag != "Tag")
         {
             AddPin(CenterPoint)
+            PinCount=PinCount+1
             animateOut(desiredView: BlurView)
             animateOut(desiredView: PinView)
             PinErrorLabel.text = ""
+            ExitButton.sendActions(for: .touchUpInside)
+            // After loading DeleteDataFirebase()
+            AddDataToFirebase()
         }
         else
         {
@@ -482,6 +490,91 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         textField.resignFirstResponder()
         return true
     }
+    func AddDataToFirebase(){
+        let db = Firestore.firestore()
+        var Pins = 0
+        var I = 0
+        //DeleteDataFirebase()
+        while Pins != PinCount
+        {
+            //Add Data
+            I = Pins+1
+            db.collection("Users").document(CurUsr.ID).collection("MyPins").document(I.description).setData(["Name":MyPins[I].Name, "Address":MyPins[I].Address, "Location":MyPins[I].Location, "Tag":MyPins[I].Tag, "Public":MyPins[I].Public, "Creator":MyPins[I].Tag] ) { error in
+                
+                if error != nil
+                {
+                    print("Error saving users Pins!!!")
+                }
+                
+                
+            }
+            
+            Pins=Pins+1
+        }
+    }
+    
+    //Bottom Menu
+    @IBAction func OnMyPinsButton(_ sender: Any) {
+        //dump(MyPins)
+        //AddDataToFirebase()
+    }
+    
+    func DeleteDataFirebase(){
+        let db = Firestore.firestore()
+        let docref = db.collection("Users").document(CurUsr.ID).collection("MyPins")
+            
+            docref.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    //print(document.documentID)
+                    docref.document(document.documentID).delete()
+                }
+            }
+        }
+    }
+    func GetDataFromFirebase(){
+        let db = Firestore.firestore()
+        let docref = db.collection("Users").document(CurUsr.ID).collection("MyPins")
+        
+        docref.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    self.MyPins[Int(document.documentID)!].Name = document.get("Name") as? String ?? ""
+                    self.MyPins[Int(document.documentID)!].Address = document.get("Address") as? String ?? ""
+                    self.MyPins[Int(document.documentID)!].Creator = document.get("Creator") as? String ?? ""
+                    self.MyPins[Int(document.documentID)!].Location = (document.get("Location") as? GeoPoint)!
+                    self.MyPins[Int(document.documentID)!].Public = document.get("Public") as? Bool ?? true
+                    self.MyPins[Int(document.documentID)!].Tag = document.get("Tag") as? String ?? ""
+                    self.PinCount = self.PinCount+1
+                    
+                }
+            }
+        }
+        
+        PinCount = PinCount-1
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -506,6 +599,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         PinTag = PinTags[indexPath.row].description
         TagButton.sendActions(for: .touchUpInside)
     }
+    
     
     
 }
