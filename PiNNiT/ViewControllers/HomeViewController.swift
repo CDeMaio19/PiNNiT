@@ -106,6 +106,13 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
                 print("Document does not exist")
             }
         }
+        In(desiredView: BlurView)
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
+            self.animateOut(desiredView: self.BlurView)
+            self.GetDataFromFirebase()
+            print("Pincount:" ,self.PinCount)
+        }
+        
         
         
         
@@ -272,6 +279,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             mapIsReady()
             if (boardManager.isShowingBulletin){
             boardManager.dismissBulletin()
+            //GetDataFromFirebase()
             }
             break
         case .denied:
@@ -287,6 +295,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             mapIsReady()
             if (boardManager.isShowingBulletin){
             boardManager.dismissBulletin()
+            //GetDataFromFirebase()
             }
             break
         default:
@@ -361,6 +370,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             
             self.PinAddressET.text = streetNumber+" "+streetName+", "+town
         }
+        DeleteDataFirebase()
         
         
     }
@@ -372,6 +382,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         MapView.addAnnotation(pin)
         MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag, privacy: true, Id: CurUsr.ID))
         print("PinCount: ",PinCount)
+        print(MyPins.count)
     }
     //Pin Screen
     @IBAction func PinCheckButtonIsClicked(_ sender: Any) {
@@ -384,7 +395,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             PinErrorLabel.text = ""
             ExitButton.sendActions(for: .touchUpInside)
             // After loading DeleteDataFirebase()
-            AddDataToFirebase()
         }
         else
         {
@@ -400,6 +410,17 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         PinTag = "Tag"
         TagButton.setTitle(PinTag, for: .normal)
         TagButton.setTitleColor(UIColor.init(red: 189/255, green: 249/255, blue: 254/255, alpha: 1), for: .normal)
+        AddDataToFirebase()
+    }
+    func In(desiredView: UIView){
+        let backroundView = self.view!
+        backroundView.addSubview(desiredView)
+        
+        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        desiredView.alpha = 0.9
+        desiredView.center = backroundView.center
+        desiredView.layer.cornerRadius = 50
+        
     }
     func animateIn(desiredView: UIView){
         let backroundView = self.view!
@@ -499,7 +520,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         {
             //Add Data
             I = Pins+1
-            db.collection("Users").document(CurUsr.ID).collection("MyPins").document(I.description).setData(["Name":MyPins[I].Name, "Address":MyPins[I].Address, "Location":MyPins[I].Location, "Tag":MyPins[I].Tag, "Public":MyPins[I].Public, "Creator":MyPins[I].Tag] ) { error in
+            db.collection("Users").document(CurUsr.ID).collection("MyPins").document(I.description).setData(["Name":MyPins[I].Name, "Address":MyPins[I].Address, "Location":MyPins[I].Location, "Tag":MyPins[I].Tag, "Public":MyPins[I].Public, "Creator":CurUsr.ID] ) { error in
                 
                 if error != nil
                 {
@@ -516,7 +537,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     //Bottom Menu
     @IBAction func OnMyPinsButton(_ sender: Any) {
         //dump(MyPins)
-        //AddDataToFirebase()
+        //GetDataFromFirebase()
     }
     
     func DeleteDataFirebase(){
@@ -537,28 +558,41 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     func GetDataFromFirebase(){
         let db = Firestore.firestore()
         let docref = db.collection("Users").document(CurUsr.ID).collection("MyPins")
-        
-        docref.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    self.MyPins[Int(document.documentID)!].Name = document.get("Name") as? String ?? ""
-                    self.MyPins[Int(document.documentID)!].Address = document.get("Address") as? String ?? ""
-                    self.MyPins[Int(document.documentID)!].Creator = document.get("Creator") as? String ?? ""
-                    self.MyPins[Int(document.documentID)!].Location = (document.get("Location") as? GeoPoint)!
-                    self.MyPins[Int(document.documentID)!].Public = document.get("Public") as? Bool ?? true
-                    self.MyPins[Int(document.documentID)!].Tag = document.get("Tag") as? String ?? ""
-                    self.PinCount = self.PinCount+1
-                    
+            docref.getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let geopoint = document.get("Location") as! GeoPoint
+                        let location = CLLocationCoordinate2D(latitude: geopoint.latitude, longitude: geopoint.longitude)
+                        //print(location)
+                        
+                        self.MyPins.append(Pin(name: document.get("Name") as? String ?? "", address: document.get("Address") as? String ?? "", location: location, tag: document.get("Tag") as? String ?? "", privacy: document.get("Public") as? Bool ?? true, Id: document.get("Creator") as? String ?? ""))
+                        self.PinCount = Int(document.documentID)!
+                        
+                        print("pulled data")
+                        dump(self.MyPins)
+                        print(self.MyPins.count)
+                        print(self.PinCount)
+                        let pin = MKPointAnnotation()
+                        pin.coordinate = location
+                        pin.title = document.get("Name") as? String ?? ""
+                        pin.subtitle = document.get("Address") as? String ?? ""
+                        self.MapView.addAnnotation(pin)
+                    }
                 }
             }
+            PinCount = PinCount-1
         }
-        
-        PinCount = PinCount-1
+    
+    func applicationDidEnterBackground(application: UIApplication) {
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        AddDataToFirebase()
     }
-    
-    
+    func applicationWillTerminate(application: UIApplication) {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        AddDataToFirebase()
+    }
     
     
     

@@ -23,6 +23,7 @@ class SlideMenuViewController: UIViewController {
     @IBOutlet weak var ExitButton: UIButton!
     @IBOutlet weak var NameLabel: UILabel!
     
+    @IBOutlet weak var HomeButton: UIButton!
     @IBOutlet weak var PlacesButton: UIButton!
     @IBOutlet weak var FreindsButton: UIButton!
     @IBOutlet weak var SettingButton: UIButton!
@@ -31,6 +32,7 @@ class SlideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         let db = Firestore.firestore()
         let UID = Help.getUID()
@@ -64,10 +66,38 @@ class SlideMenuViewController: UIViewController {
         
     }
     @IBAction func ExitButtonTapped(_ sender: Any) {
-        
         self.delegate?.HideMenuView()
-        
     }
+    
+    @IBAction func HomeButtonTapped(_ sender: Any) {
+        if String(self.delegate.debugDescription).contains("PiNNiT.HomeViewController")
+        {
+            self.delegate?.HideMenuView()
+        } else {
+            self.delegate?.HideMenuView()
+            let HomeVC = storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
+            
+            view.window?.rootViewController = HomeVC
+            view.window?.makeKeyAndVisible()
+        }
+    }
+    @IBAction func PlacesButtonTapped(_ sender: Any) {
+        if String(self.delegate.debugDescription).contains("PiNNiT.MyPinsViewController")
+        {
+            self.delegate?.HideMenuView()
+        } else {
+        self.delegate?.HideMenuView()
+        let PinsVC = storyboard?.instantiateViewController(identifier: "MyPinsVC") as? MyPinsViewController
+        
+        view.window?.rootViewController = PinsVC
+        view.window?.makeKeyAndVisible()
+        }
+    }
+    @IBAction func FreindsButtonTapped(_ sender: Any) {
+    }
+    @IBAction func settingButtonTapped(_ sender: Any) {
+    }
+    
     
 
     /*
