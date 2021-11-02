@@ -12,7 +12,7 @@ import FirebaseCore
 import MapKit
 import CoreLocation
 
-class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate{
+class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, PinsViewCellDelegate{
     
     @IBOutlet weak var TableView: UITableView!
     
@@ -30,9 +30,11 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nib = UINib(nibName: "PinsViewCell", bundle: nil)
+        TableView.register(nib, forCellReuseIdentifier: "PinsViewCell")
+        TableView.delegate = self
+        TableView.dataSource = self
         
-        //TableView.delegate = self
-        //TableView.dataSource = self
         BlurView.bounds = self.view.bounds
         
         BackViewMenu.isHidden = true
@@ -55,10 +57,22 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate{
         }
         In(desiredView: BlurView)
         DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
-            self.animateOut(desiredView: self.BlurView)
             self.GetDataFromFirebase()
-            print("Pincount:" ,self.PinCount)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
+                if (self.PinCount<0){
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
+                    self.GetDataFromFirebase()
+                    self.animateOut(desiredView: self.BlurView)
+                    self.TableView.reloadData()
+                    }
+                }else{
+                print("Pincount:" ,self.PinCount)
+                self.animateOut(desiredView: self.BlurView)
+                self.TableView.reloadData()
+                }
+            }
         }
+        
     }
     
     func animateOut(desiredView: UIView){
@@ -84,10 +98,10 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate{
                         self.MyPins.append(Pin(name: document.get("Name") as? String ?? "", address: document.get("Address") as? String ?? "", location: location, tag: document.get("Tag") as? String ?? "", privacy: document.get("Public") as? Bool ?? true, Id: document.get("Creator") as? String ?? ""))
                         self.PinCount = Int(document.documentID)!
                         
-                        print("pulled data")
-                        dump(self.MyPins)
-                        print("Array size: ",self.MyPins.count)
-                        print("Amount of Pins: ", self.MyPins.count - 1)
+                        //print("pulled data")
+                        //dump(self.MyPins)
+                        //print("Array size: ",self.MyPins.count)
+                        //print("Amount of Pins: ", self.MyPins.count - 1)
                         let pin = MKPointAnnotation()
                         pin.coordinate = location
                         pin.title = document.get("Name") as? String ?? ""
@@ -96,6 +110,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate{
                 }
             }
             PinCount = PinCount-1
+        print("PinCount: ", PinCount)
         }
     func DeleteDataFirebase(){
         let db = Firestore.firestore()
@@ -201,6 +216,19 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate{
     @IBAction func DismissMenuByTap(_ sender: Any) {
         self.HideMenu()
     }
+    func deletePin(PinNumber: Int, PinName: String){
+        print("Delete: ",PinNumber, " ", PinName)
+        print(self.PinCount)
+        //dump(MyPins)
+        //MyPins.remove(at: PinNumber)
+        //self.TableView.reloadData()
+    }
+    func delete(Pin: Int, PinName: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
+            self.deletePin(PinNumber: Pin, PinName: PinName)
+            self.GetDataFromFirebase()
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -211,5 +239,26 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate{
         // Pass the selected object to the new view controller.
     }
     */
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print(MyPins.count - 1)
+        return (MyPins.count - 1)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PinsViewCell", for: indexPath) as! PinsViewCell
+        cell.NameET.text = MyPins[(indexPath.row + 1)].Name
+        cell.AddressET.text = MyPins[(indexPath.row + 1)].Address
+        cell.TagButton.setTitle(MyPins[(indexPath.row + 1)].Tag, for: .normal)
+        if (MyPins[(indexPath.row + 1)].Public == true){
+            cell.PublicButton.setTitle("Make Private", for: .normal)
+        } else {
+        cell.PublicButton.setTitle("Make Public", for: .normal)
+        }
+        cell.PinIDLabel.text = String(indexPath.row)
+        //dump(cell)
+        return cell
+        
+        
+    }
 }

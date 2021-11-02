@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PinsViewCell" rowHeight="100" id="KGk-i7-Jjw" customClass="PinsViewCell" customModule="PiNNiT" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="415" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="415" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="D3V-41-1BE">
+                        <rect key="frame" x="10" y="19.5" width="41" height="61"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="41" id="u96-0c-Tmx"/>
+                            <constraint firstAttribute="height" constant="61" id="yto-sI-J64"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="KIN-C8-1cq">
+                        <rect key="frame" x="61" y="10" width="294" height="80"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" textAlignment="center" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-am-lEo">
+                                <rect key="frame" x="0.0" y="0.0" width="294" height="25.5"/>
+                                <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.45098039220000002" green="0.99215686270000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Address" borderStyle="roundedRect" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Zjz-am-GQL">
+                                <rect key="frame" x="0.0" y="27.5" width="294" height="25"/>
+                                <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.45098039220000002" green="0.99215686270000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="URD-Xu-uzj">
+                                <rect key="frame" x="0.0" y="54.5" width="294" height="25.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuQ-PA-zHK">
+                                        <rect key="frame" x="0.0" y="0.0" width="146" height="25.5"/>
+                                        <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="Tag">
+                                            <color key="titleColor" red="0.45098039220000002" green="0.99215686270000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="TagButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VkH-bV-x2s"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPp-Nf-MHh">
+                                        <rect key="frame" x="148" y="0.0" width="146" height="25.5"/>
+                                        <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="Make Public">
+                                            <color key="titleColor" red="0.45098039220000002" green="0.99215686270000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="PublicButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="r9n-8u-TVU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7H-Xd-n0w">
+                        <rect key="frame" x="365" y="10" width="40" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="FTn-HG-8A4"/>
+                        </constraints>
+                        <color key="tintColor" systemColor="systemRedColor"/>
+                        <state key="normal" image="trash" catalog="system"/>
+                        <connections>
+                            <action selector="DeleteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MGU-ko-a15"/>
+                        </connections>
+                    </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3L-38-mCB">
+                        <rect key="frame" x="27" y="40" width="7.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="D3V-41-1BE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9dP-NZ-ct6"/>
+                    <constraint firstItem="a7H-Xd-n0w" firstAttribute="leading" secondItem="KIN-C8-1cq" secondAttribute="trailing" constant="10" id="AIj-9s-P48"/>
+                    <constraint firstItem="KIN-C8-1cq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="EHw-Ii-Hv7"/>
+                    <constraint firstAttribute="bottom" secondItem="a7H-Xd-n0w" secondAttribute="bottom" constant="10" id="Hto-9f-23N"/>
+                    <constraint firstItem="a7H-Xd-n0w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="XL9-Vi-Tv2"/>
+                    <constraint firstAttribute="trailing" secondItem="a7H-Xd-n0w" secondAttribute="trailing" constant="10" id="Zqo-qH-lIp"/>
+                    <constraint firstItem="S3L-38-mCB" firstAttribute="centerX" secondItem="D3V-41-1BE" secondAttribute="centerX" id="aWh-4e-Okr"/>
+                    <constraint firstItem="S3L-38-mCB" firstAttribute="centerY" secondItem="D3V-41-1BE" secondAttribute="centerY" id="ggT-Zm-aLU"/>
+                    <constraint firstAttribute="bottom" secondItem="KIN-C8-1cq" secondAttribute="bottom" constant="10" id="hbG-pZ-Sdl"/>
+                    <constraint firstItem="KIN-C8-1cq" firstAttribute="leading" secondItem="D3V-41-1BE" secondAttribute="trailing" constant="10" id="iJw-i9-nW9"/>
+                    <constraint firstItem="D3V-41-1BE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="tg7-fD-IHK"/>
+                    <constraint firstItem="a7H-Xd-n0w" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vfC-gS-WrH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="0.74117647060000003" green="0.97647058819999999" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="AddressET" destination="Zjz-am-GQL" id="5hQ-m3-K4q"/>
+                <outlet property="DeleteButton" destination="a7H-Xd-n0w" id="l7a-XH-FOc"/>
+                <outlet property="NameET" destination="6ad-am-lEo" id="yaw-3N-oVs"/>
+                <outlet property="PinIDLabel" destination="S3L-38-mCB" id="3qZ-1u-2Mi"/>
+                <outlet property="PublicButton" destination="iPp-Nf-MHh" id="hKq-xz-g54"/>
+                <outlet property="TagButton" destination="VuQ-PA-zHK" id="XJ8-aY-sGM"/>
+            </connections>
+            <point key="canvasLocation" x="200.72463768115944" y="98.4375"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Pin.png" width="37" height="37"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

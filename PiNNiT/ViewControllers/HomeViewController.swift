@@ -108,9 +108,15 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         }
         In(desiredView: BlurView)
         DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
-            self.animateOut(desiredView: self.BlurView)
             self.GetDataFromFirebase()
+            if (self.PinCount <= 0)
+            {
+                DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
+                self.GetDataFromFirebase()
+                }
+            }
             print("Pincount:" ,self.PinCount)
+            self.animateOut(desiredView: self.BlurView)
         }
         
         
@@ -380,7 +386,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         pin.title = PinNameET.text
         pin.subtitle = PinAddressET.text
         MapView.addAnnotation(pin)
-        MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag, privacy: true, Id: CurUsr.ID))
+        MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag, privacy: false, Id: CurUsr.ID))
         print("PinCount: ",PinCount)
         print(MyPins.count)
     }
