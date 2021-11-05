@@ -71,6 +71,11 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     var PinCount = 0
     @IBOutlet weak var ExitButton: UIButton!
     
+    //Core Data
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var CoreDataPins:[Pins]?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +98,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         let db = Firestore.firestore()
         let UID = Help.getUID()
         
+        
         db.collection("Users").document(UID).getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
@@ -106,22 +112,10 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
                 print("Document does not exist")
             }
         }
-        In(desiredView: BlurView)
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
-            self.GetDataFromFirebase()
-            if (self.PinCount <= 0)
-            {
-                DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
-                self.GetDataFromFirebase()
-                }
-            }
-            print("Pincount:" ,self.PinCount)
-            self.animateOut(desiredView: self.BlurView)
-        }
         
-        
-        
-        
+        self.fetchCoreData()
+        self.loadCorePins()
+        NavButton.sendActions(for: .touchUpInside)
         
         
     }
@@ -387,6 +381,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         pin.subtitle = PinAddressET.text
         MapView.addAnnotation(pin)
         MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag, privacy: false, Id: CurUsr.ID))
+        AddCoreData(name: PinNameET.text!, address: PinAddressET.text!, lat: Cordinates.latitude, long: Cordinates.longitude, tag: PinTag, view: false, Id: CurUsr.ID)
         print("PinCount: ",PinCount)
         print(MyPins.count)
     }
@@ -416,7 +411,8 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         PinTag = "Tag"
         TagButton.setTitle(PinTag, for: .normal)
         TagButton.setTitleColor(UIColor.init(red: 189/255, green: 249/255, blue: 254/255, alpha: 1), for: .normal)
-        AddDataToFirebase()
+        fetchCoreData()
+        saveCoreData()
     }
     func In(desiredView: UIView){
         let backroundView = self.view!
@@ -593,50 +589,89 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        AddDataToFirebase()
+        fetchCoreData()
+        saveCoreData()
     }
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        AddDataToFirebase()
+        fetchCoreData()
+        saveCoreData()
     }
     
+//Core Data
     
+    func loadCorePins(){
+        for element in CoreDataPins! {
+            
+            let location = CLLocationCoordinate2D(latitude: element.lat, longitude: element.lon)
+            let pin = MKPointAnnotation()
+            pin.coordinate = location
+            pin.title = element.name
+            pin.subtitle = element.address
+            self.MapView.addAnnotation(pin)
+        }
+        
+    }
     
+    func fetchCoreData() {
+        do{
+            self.CoreDataPins = try context.fetch(Pins.fetchRequest())
+            
+            dump(CoreDataPins)
+            
+        } catch {
+            
+        }
+        
+    }
     
+    func saveCoreData() {
+        do {
+            try self.context.save()
+        } catch{
+            
+        }
+    }
     
+    func AddCoreData(name: String, address: String, lat: Double, long: Double, tag: String,view: Bool,Id: String){
+        let NewCorePin = Pins(context: self.context)
+        NewCorePin.name = name
+        NewCorePin.address = address
+        NewCorePin.lat = lat
+        NewCorePin.lon = long
+        NewCorePin.tag = tag
+        NewCorePin.view = view
+        NewCorePin.creator = Id
+        
+        self.saveCoreData()
+        
+        self.fetchCoreData()
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
+    func DeleteCoreDataPin(){
+        let pinToRemove = self.CoreDataPins![0]
+        self.context.delete(pinToRemove)
+        
+        self.saveCoreData()
+        
+        self.fetchCoreData()
+        
+    }
 
 }
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showMenu ? PinTags.count : 0
+        return showMenu ? CoreDataPins!.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! DropDownCell
         cell.backgroundColor = UIColor.init(red: 0/255, green: 158/255, blue: 171/255, alpha: 1)
-        cell.TitleLabel.text = PinTags[indexPath.row].description
+        cell.TitleLabel.text = CoreDataPins![indexPath.row].description
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PinTag = PinTags[indexPath.row].description
+        PinTag = CoreDataPins![indexPath.row].description
         TagButton.sendActions(for: .touchUpInside)
     }
     

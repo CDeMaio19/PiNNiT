@@ -28,6 +28,10 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     @IBOutlet weak var MenuView: UIView!
     @IBOutlet weak var MenuButton: UIButton!
     
+    //Core Data
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var CoreDataPins:[Pins]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "PinsViewCell", bundle: nil)
@@ -57,23 +61,14 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         }
         In(desiredView: BlurView)
         DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
-            self.GetDataFromFirebase()
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-                if (self.PinCount<0){
-                    DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
-                    self.GetDataFromFirebase()
-                    self.animateOut(desiredView: self.BlurView)
-                    self.TableView.reloadData()
-                    }
-                }else{
-                print("Pincount:" ,self.PinCount)
-                self.animateOut(desiredView: self.BlurView)
-                self.TableView.reloadData()
-                }
+            self.fetchCoreData()
+            self.TableView.reloadData()
+            self.animateOut(desiredView: self.BlurView)
             }
-        }
         
     }
+        
+
     
     func animateOut(desiredView: UIView){
         UIView.animate(withDuration: 0.3, animations: {
@@ -229,7 +224,43 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
             self.GetDataFromFirebase()
         }
     }
-
+    
+    
+    //CoreData
+    func fetchCoreData() {
+        do{
+            self.CoreDataPins = try context.fetch(Pins.fetchRequest())
+            
+            dump(CoreDataPins)
+            
+        } catch {
+            
+        }
+        
+    }
+    
+    func saveCoreData() {
+        do {
+            try self.context.save()
+        } catch{
+            
+        }
+    }
+    
+    func AddCoreData(name: String, address: String, lat: Double, long: Double, tag: String,view: Bool,Id: String){
+        let NewCorePin = Pins(context: self.context)
+        NewCorePin.name = name
+        NewCorePin.address = address
+        NewCorePin.lat = lat
+        NewCorePin.lon = long
+        NewCorePin.tag = tag
+        NewCorePin.view = view
+        NewCorePin.creator = Id
+        
+        self.saveCoreData()
+        
+        self.fetchCoreData()
+    }
     /*
     // MARK: - Navigation
 
@@ -241,16 +272,17 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(MyPins.count - 1)
-        return (MyPins.count - 1)
+        self.fetchCoreData()
+        return (CoreDataPins!.count)
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PinsViewCell", for: indexPath) as! PinsViewCell
-        cell.NameET.text = MyPins[(indexPath.row + 1)].Name
-        cell.AddressET.text = MyPins[(indexPath.row + 1)].Address
-        cell.TagButton.setTitle(MyPins[(indexPath.row + 1)].Tag, for: .normal)
-        if (MyPins[(indexPath.row + 1)].Public == true){
+        cell.NameET.text = CoreDataPins![(indexPath.row)].name
+        cell.AddressET.text = CoreDataPins![(indexPath.row)].address
+        cell.TagButton.setTitle(CoreDataPins![(indexPath.row)].tag, for: .normal)
+        if (CoreDataPins![(indexPath.row)].view == true){
             cell.PublicButton.setTitle("Make Private", for: .normal)
         } else {
         cell.PublicButton.setTitle("Make Public", for: .normal)

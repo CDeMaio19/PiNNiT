@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/demaio/Documents/Git/PiNNiT/PiNNiT/Helper/Pins+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
       location = "group:PiNNiT.xcodeproj">
    </FileRef>
    <FileRef
