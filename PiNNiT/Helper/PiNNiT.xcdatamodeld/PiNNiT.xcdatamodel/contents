@@ -10,10 +10,14 @@
         <attribute name="view" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
+        <attribute name="creator" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
         <relationship name="pins" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Pins"/>
     </entity>
     <elements>
         <element name="Pins" positionX="-63" positionY="-18" width="128" height="134"/>
-        <element name="Users" positionX="-54" positionY="45" width="128" height="44"/>
+        <element name="Users" positionX="-54" positionY="45" width="128" height="104"/>
     </elements>
 </model>

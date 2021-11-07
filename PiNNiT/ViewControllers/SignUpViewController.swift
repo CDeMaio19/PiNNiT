@@ -20,6 +20,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ErrorTF: UILabel!
     @IBOutlet weak var Exit: UIButton!
     
+    //Core Data
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var CoreDataUser:[Users]?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,14 +82,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let Password = PasswordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
             //Create User
-            Auth.auth().createUser(withEmail: Email, password: Password) { result, err in
+            Auth.auth().createUser(withEmail: Email, password: Password) { [self] result, err in
                 if err != nil {
                     Help.Show(self.ErrorTF, "Error creating user!!!")
                 } else {
                     let db = Firestore.firestore()
-                    
+                   
+                    //Add Core Data User
+                    let NewCoreUser = Users(context: self.context)
+                    NewCoreUser.creator = result!.user.uid
+                    NewCoreUser.email = Email
+                    NewCoreUser.firstName = FirstName
+                    NewCoreUser.lastName = LastName
+                    self.saveCoreData()
                     //Add Data
-                    db.collection("Users").document(result!.user.uid).setData(["First_Name":FirstName, "Last_Name":LastName, "ID":result!.user.uid, "Email": Email] ) { error in
+                    db.collection("Users").document(result!.user.uid).setData(["First_Name":FirstName, "Last_Name":LastName, "ID":result!.user.uid, "Email": Email] ){ error in
                         
                         if error != nil
                         {
@@ -107,6 +118,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         view.window?.rootViewController = LoginVC
         view.window?.makeKeyAndVisible()
+    }
+    
+    func saveCoreData() {
+        do {
+            try self.context.save()
+        } catch{
+            
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

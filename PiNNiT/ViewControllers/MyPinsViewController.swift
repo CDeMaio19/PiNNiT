@@ -11,8 +11,10 @@ import FirebaseFirestore
 import FirebaseCore
 import MapKit
 import CoreLocation
+import CoreData
 
 class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, PinsViewCellDelegate{
+    
     
     @IBOutlet weak var TableView: UITableView!
     
@@ -46,6 +48,8 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         let db = Firestore.firestore()
         let UID = Help.getUID()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        
         db.collection("Users").document(UID).getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
@@ -60,7 +64,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
             }
         }
         In(desiredView: BlurView)
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
             self.fetchCoreData()
             self.TableView.reloadData()
             self.animateOut(desiredView: self.BlurView)
@@ -68,7 +72,14 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         
     }
         
-
+    @objc func loadList(notification: NSNotification){
+        In(desiredView: BlurView)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            self.fetchCoreData()
+            self.TableView.reloadData()
+            self.animateOut(desiredView: self.BlurView)
+            }
+    }
     
     func animateOut(desiredView: UIView){
         UIView.animate(withDuration: 0.3, animations: {
@@ -211,28 +222,38 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     @IBAction func DismissMenuByTap(_ sender: Any) {
         self.HideMenu()
     }
-    func deletePin(PinNumber: Int, PinName: String){
-        print("Delete: ",PinNumber, " ", PinName)
-        print(self.PinCount)
-        //dump(MyPins)
-        //MyPins.remove(at: PinNumber)
-        //self.TableView.reloadData()
-    }
-    func delete(Pin: Int, PinName: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
-            self.deletePin(PinNumber: Pin, PinName: PinName)
-            self.GetDataFromFirebase()
+    func deletePin(PinNumber: Int, PinName: String, PinAddress: String){
+        print("Delete: ",PinNumber, " ", PinName, " ", PinAddress)
+        
+        //Find Item
+        do{
+        let req = Pins.fetchRequest() as NSFetchRequest<Pins>
+        let pred = NSPredicate(format: "(name CONTAINS %@) AND (address CONTAINS %@)", PinName, PinAddress)
+        req.predicate = pred
+            
+        let delPin = try context.fetch(req)
+        dump(delPin[0])
+        self.context.delete(delPin[0])
+        saveCoreData()
+            
         }
+        catch {
+            
+    }
+        refresh()
+    }
+    func delete(Pin: Int, PinName: String, PinAddress: String) {
+            self.deletePin(PinNumber: Pin, PinName: PinName, PinAddress: PinAddress)
     }
     
-    
+    func refresh(){
+            self.fetchCoreData()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+    }
     //CoreData
     func fetchCoreData() {
         do{
             self.CoreDataPins = try context.fetch(Pins.fetchRequest())
-            
-            dump(CoreDataPins)
-            
         } catch {
             
         }

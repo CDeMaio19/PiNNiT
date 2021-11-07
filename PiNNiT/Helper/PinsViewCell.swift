@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PinsViewCellDelegate {
-    func delete(Pin: Int, PinName: String)
+    func delete(Pin: Int, PinName: String, PinAddress: String)
 }
 
 class PinsViewCell: UITableViewCell{
@@ -36,7 +36,7 @@ class PinsViewCell: UITableViewCell{
     }
     @IBAction func DeleteButtonTapped(_ sender: Any) {
         let PinNumber:Int? = Int(PinIDLabel.text!)
-        self.delegate?.delete(Pin: PinNumber!, PinName: NameET.text!)
+        self.delegate?.delete(Pin: PinNumber!, PinName: NameET.text!, PinAddress: AddressET.text!)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

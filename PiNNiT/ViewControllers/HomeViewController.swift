@@ -74,6 +74,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     //Core Data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var CoreDataPins:[Pins]?
+    var CoreDataUser:[Users]?
     
     
     
@@ -112,6 +113,9 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
                 print("Document does not exist")
             }
         }
+        
+        //print("User: ")
+        //dump(CoreDataUser)
         
         self.fetchCoreData()
         self.loadCorePins()
@@ -616,9 +620,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     func fetchCoreData() {
         do{
             self.CoreDataPins = try context.fetch(Pins.fetchRequest())
-            
-            dump(CoreDataPins)
-            
         } catch {
             
         }
