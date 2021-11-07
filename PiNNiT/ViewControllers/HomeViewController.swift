@@ -662,19 +662,21 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
 }
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showMenu ? CoreDataPins!.count : 0
+        return showMenu ? PinTags.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! DropDownCell
         cell.backgroundColor = UIColor.init(red: 0/255, green: 158/255, blue: 171/255, alpha: 1)
-        cell.TitleLabel.text = CoreDataPins![indexPath.row].description
+        cell.TitleLabel.text = PinTags[indexPath.row].description
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PinTag = CoreDataPins![indexPath.row].description
+        PinTag = PinTags[indexPath.row].description
         TagButton.sendActions(for: .touchUpInside)
     }
+        
+    
     
     
     
