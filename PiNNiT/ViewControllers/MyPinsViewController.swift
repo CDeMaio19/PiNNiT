@@ -33,6 +33,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     //Core Data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var CoreDataPins:[Pins]?
+    var CoreDataUser:[Users]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,33 +45,63 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         BlurView.bounds = self.view.bounds
         
         BackViewMenu.isHidden = true
-
-        let db = Firestore.firestore()
-        let UID = Help.getUID()
+        
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         
-        db.collection("Users").document(UID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                //print("Document data: \(dataDescription)")
-                self.CurUsr.FirstName = document.get("First_Name") as? String ?? ""
-                self.CurUsr.LastName = document.get("Last_Name") as? String ?? ""
-                self.CurUsr.ID = document.get("ID") as? String ?? ""
-                self.CurUsr.Email = document.get("Email") as? String ?? ""
-                //self.Datafill()
-            } else {
-                print("Document does not exist")
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(deletePop), name: NSNotification.Name(rawValue: "delete"), object: nil)
+        
         In(desiredView: BlurView)
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
             self.fetchCoreData()
+            self.setUser()
             self.TableView.reloadData()
             self.animateOut(desiredView: self.BlurView)
             }
         
     }
+    
+    @objc func deletePop() {
+        let alert = UIAlertController(title: "Delete Pin", message: "Are you sure?", preferredStyle: .alert)
+        let yesButton = UIAlertAction(title: "Yes", style: .default) {(action) in
+            
+        }
+        let noButton = UIAlertAction(title: "No", style: .default) {(action) in
+            return
+        }
+        alert.addAction(yesButton)
+        alert.addAction(noButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func loadUserPins(){
+        dump(CoreDataPins)
+        var i = 0
+        for element in CoreDataPins! {
+            if element.creator != CurUsr.ID {
+                CoreDataPins!.remove(at: i)
+                i=i-1
+            }else{
+            }
+            i=i+1
+        }
+    }
+    
+    func setUser(){
+        do{
+            let req = Users.fetchRequest() as NSFetchRequest<Users>
+            let pred = NSPredicate(format: "isActive == YES")
+            req.predicate = pred
+            let ActiveUser = try context.fetch(req)
+            CurUsr.FirstName = ActiveUser[0].firstName!
+            CurUsr.LastName = ActiveUser[0].lastName!
+            CurUsr.ID = ActiveUser[0].creator!
+            CurUsr.Email = ActiveUser[0].email!
+            }catch{
+            }
+            
+        }
         
     @objc func loadList(notification: NSNotification){
         In(desiredView: BlurView)
@@ -89,72 +120,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
             desiredView.removeFromSuperview()
         })
     }
-    func GetDataFromFirebase(){
-        let db = Firestore.firestore()
-        let docref = db.collection("Users").document(CurUsr.ID).collection("MyPins")
-            docref.getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let geopoint = document.get("Location") as! GeoPoint
-                        let location = CLLocationCoordinate2D(latitude: geopoint.latitude, longitude: geopoint.longitude)
-                        //print(location)
-                        
-                        self.MyPins.append(Pin(name: document.get("Name") as? String ?? "", address: document.get("Address") as? String ?? "", location: location, tag: document.get("Tag") as? String ?? "", privacy: document.get("Public") as? Bool ?? true, Id: document.get("Creator") as? String ?? ""))
-                        self.PinCount = Int(document.documentID)!
-                        
-                        //print("pulled data")
-                        //dump(self.MyPins)
-                        //print("Array size: ",self.MyPins.count)
-                        //print("Amount of Pins: ", self.MyPins.count - 1)
-                        let pin = MKPointAnnotation()
-                        pin.coordinate = location
-                        pin.title = document.get("Name") as? String ?? ""
-                        pin.subtitle = document.get("Address") as? String ?? ""
-                    }
-                }
-            }
-            PinCount = PinCount-1
-        print("PinCount: ", PinCount)
-        }
-    func DeleteDataFirebase(){
-        let db = Firestore.firestore()
-        let docref = db.collection("Users").document(CurUsr.ID).collection("MyPins")
-            
-            docref.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    //print(document.documentID)
-                    docref.document(document.documentID).delete()
-                }
-            }
-        }
-    }
-    func AddDataToFirebase(){
-        let db = Firestore.firestore()
-        var Pins = 0
-        var I = 0
-        //DeleteDataFirebase()
-        while Pins != PinCount
-        {
-            //Add Data
-            I = Pins+1
-            db.collection("Users").document(CurUsr.ID).collection("MyPins").document(I.description).setData(["Name":MyPins[I].Name, "Address":MyPins[I].Address, "Location":MyPins[I].Location, "Tag":MyPins[I].Tag, "Public":MyPins[I].Public, "Creator":CurUsr.ID] ) { error in
-                
-                if error != nil
-                {
-                    print("Error saving users Pins!!!")
-                }
-                
-                
-            }
-            
-            Pins=Pins+1
-        }
-    }
+    
     func In(desiredView: UIView){
         let backroundView = self.view!
         backroundView.addSubview(desiredView)
@@ -243,7 +209,8 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         refresh()
     }
     func delete(Pin: Int, PinName: String, PinAddress: String) {
-            self.deletePin(PinNumber: Pin, PinName: PinName, PinAddress: PinAddress)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "delete"), object: nil)
+        self.deletePin(PinNumber: Pin, PinName: PinName, PinAddress: PinAddress)
     }
     
     func refresh(){
@@ -254,6 +221,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     func fetchCoreData() {
         do{
             self.CoreDataPins = try context.fetch(Pins.fetchRequest())
+            self.CoreDataUser = try context.fetch(Users.fetchRequest())
         } catch {
             
         }
@@ -292,8 +260,8 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     }
     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print(MyPins.count - 1)
         self.fetchCoreData()
+        self.loadUserPins()
         return (CoreDataPins!.count)
         
     }

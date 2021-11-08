@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import CoreData
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
@@ -94,6 +95,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     NewCoreUser.email = Email
                     NewCoreUser.firstName = FirstName
                     NewCoreUser.lastName = LastName
+                    NewCoreUser.isActive = false
+                    NewCoreUser.password = Password
                     self.saveCoreData()
                     //Add Data
                     db.collection("Users").document(result!.user.uid).setData(["First_Name":FirstName, "Last_Name":LastName, "ID":result!.user.uid, "Email": Email] ){ error in

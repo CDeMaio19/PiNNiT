@@ -12,6 +12,7 @@ import FirebaseCore
 import MapKit
 import CoreLocation
 import BLTNBoard
+import CoreData
 
 private let reuseIdentifier = "DropDownCell"
 private let PinTags = ["House", "Resturant", "Park", "Point of Intrest"] //Add More
@@ -96,34 +97,30 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         PinConfirmView.layer.cornerRadius = 10
         PinConfirmView.isHidden = true
         
-        let db = Firestore.firestore()
-        let UID = Help.getUID()
+        fetchCoreData()
+        setUser()
+        loadCorePins()
         
-        
-        db.collection("Users").document(UID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                //print("Document data: \(dataDescription)")
-                self.CurUsr.FirstName = document.get("First_Name") as? String ?? ""
-                self.CurUsr.LastName = document.get("Last_Name") as? String ?? ""
-                self.CurUsr.ID = document.get("ID") as? String ?? ""
-                self.CurUsr.Email = document.get("Email") as? String ?? ""
-                //self.Datafill()
-            } else {
-                print("Document does not exist")
-            }
-        }
-        
-        //print("User: ")
-        //dump(CoreDataUser)
-        
-        self.fetchCoreData()
-        self.loadCorePins()
         NavButton.sendActions(for: .touchUpInside)
-        
-        
+        /*DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
+            self.LoadCoreData()
+        }*/
     }
     
+    func setUser(){
+        do{
+            let req = Users.fetchRequest() as NSFetchRequest<Users>
+            let pred = NSPredicate(format: "isActive == YES")
+            req.predicate = pred
+            let ActiveUser = try context.fetch(req)
+            CurUsr.FirstName = ActiveUser[0].firstName!
+            CurUsr.LastName = ActiveUser[0].lastName!
+            CurUsr.ID = ActiveUser[0].creator!
+            CurUsr.Email = ActiveUser[0].email!
+            }catch{
+            }
+            
+        }
     var SlideMenuViewController:SlideMenuViewController?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "SlideMenuSegue")
@@ -374,7 +371,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             
             self.PinAddressET.text = streetNumber+" "+streetName+", "+town
         }
-        DeleteDataFirebase()
         
         
     }
@@ -517,79 +513,12 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         textField.resignFirstResponder()
         return true
     }
-    func AddDataToFirebase(){
-        let db = Firestore.firestore()
-        var Pins = 0
-        var I = 0
-        //DeleteDataFirebase()
-        while Pins != PinCount
-        {
-            //Add Data
-            I = Pins+1
-            db.collection("Users").document(CurUsr.ID).collection("MyPins").document(I.description).setData(["Name":MyPins[I].Name, "Address":MyPins[I].Address, "Location":MyPins[I].Location, "Tag":MyPins[I].Tag, "Public":MyPins[I].Public, "Creator":CurUsr.ID] ) { error in
-                
-                if error != nil
-                {
-                    print("Error saving users Pins!!!")
-                }
-                
-                
-            }
-            
-            Pins=Pins+1
-        }
-    }
     
     //Bottom Menu
     @IBAction func OnMyPinsButton(_ sender: Any) {
         //dump(MyPins)
         //GetDataFromFirebase()
     }
-    
-    func DeleteDataFirebase(){
-        let db = Firestore.firestore()
-        let docref = db.collection("Users").document(CurUsr.ID).collection("MyPins")
-            
-            docref.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    //print(document.documentID)
-                    docref.document(document.documentID).delete()
-                }
-            }
-        }
-    }
-    func GetDataFromFirebase(){
-        let db = Firestore.firestore()
-        let docref = db.collection("Users").document(CurUsr.ID).collection("MyPins")
-            docref.getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let geopoint = document.get("Location") as! GeoPoint
-                        let location = CLLocationCoordinate2D(latitude: geopoint.latitude, longitude: geopoint.longitude)
-                        //print(location)
-                        
-                        self.MyPins.append(Pin(name: document.get("Name") as? String ?? "", address: document.get("Address") as? String ?? "", location: location, tag: document.get("Tag") as? String ?? "", privacy: document.get("Public") as? Bool ?? true, Id: document.get("Creator") as? String ?? ""))
-                        self.PinCount = Int(document.documentID)!
-                        
-                        print("pulled data")
-                        dump(self.MyPins)
-                        print(self.MyPins.count)
-                        print(self.PinCount)
-                        let pin = MKPointAnnotation()
-                        pin.coordinate = location
-                        pin.title = document.get("Name") as? String ?? ""
-                        pin.subtitle = document.get("Address") as? String ?? ""
-                        self.MapView.addAnnotation(pin)
-                    }
-                }
-            }
-            PinCount = PinCount-1
-        }
     
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
@@ -605,14 +534,20 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
 //Core Data
     
     func loadCorePins(){
+        var i = 0
         for element in CoreDataPins! {
-            
+            if element.creator != CurUsr.ID {
+                CoreDataPins!.remove(at: i)
+                i=i-1
+            }else{
             let location = CLLocationCoordinate2D(latitude: element.lat, longitude: element.lon)
             let pin = MKPointAnnotation()
             pin.coordinate = location
             pin.title = element.name
             pin.subtitle = element.address
             self.MapView.addAnnotation(pin)
+            }
+            i=i+1
         }
         
     }
@@ -620,6 +555,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     func fetchCoreData() {
         do{
             self.CoreDataPins = try context.fetch(Pins.fetchRequest())
+            self.CoreDataUser = try context.fetch(Users.fetchRequest())
         } catch {
             
         }
