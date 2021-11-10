@@ -67,6 +67,7 @@ class SlideMenuViewController: UIViewController {
     }
     @IBAction func ExitButtonTapped(_ sender: Any) {
         self.delegate?.HideMenuView()
+        print("Exit: ", self.delegate ?? "")
     }
     
     @IBAction func HomeButtonTapped(_ sender: Any) {
@@ -106,6 +107,16 @@ class SlideMenuViewController: UIViewController {
         }
     }
     @IBAction func settingButtonTapped(_ sender: Any) {
+        if String(self.delegate.debugDescription).contains("PiNNiT.SettingsViewController")
+        {
+            self.delegate?.HideMenuView()
+        } else {
+        self.delegate?.HideMenuView()
+        let SettingsVC = storyboard?.instantiateViewController(identifier: "SettingsVC") as? SettingsViewController
+        
+        view.window?.rootViewController = SettingsVC
+        view.window?.makeKeyAndVisible()
+        }
     }
     
     

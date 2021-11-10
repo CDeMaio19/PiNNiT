@@ -1,21 +1,13 @@
 //
-//  MyFriendsViewController.swift
+//  SettingsViewController.swift
 //  PiNNiT
 //
 //  Created by Christopher DeMaio on 11/9/21.
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
-import FirebaseCore
-import MapKit
-import CoreLocation
-import CoreData
 
-class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate{
-    
-    @IBOutlet weak var TableView: UITableView!
+class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
     
     @IBOutlet var BlurView: UIVisualEffectView!
     
@@ -27,19 +19,10 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
     @IBOutlet weak var BackViewMenu: UIView!
     @IBOutlet weak var MenuView: UIView!
     @IBOutlet weak var MenuButton: UIButton!
-    
-    /*func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-    }*/
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         BlurView.bounds = self.view.bounds
         
         BackViewMenu.isHidden = true
@@ -50,15 +33,13 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
             }
         // Do any additional setup after loading the view.
     }
-    
     func HideMenuView() {
         self.HideMenu()
-        print("exit")
     }
     
     var SlideMenuViewController:SlideMenuViewController?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "SlideMenuSegue3")
+        if (segue.identifier == "SlideMenuSegue4")
         {
             if let controller = segue.destination as? SlideMenuViewController
             {
@@ -123,7 +104,7 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
         desiredView.layer.cornerRadius = 50
         
     }
-    @IBAction func AddFriendButton(_ sender: Any) {
+    @IBAction func SignOutButtonTapped(_ sender: Any) {
     }
     
     /*
