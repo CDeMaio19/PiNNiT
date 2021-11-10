@@ -62,9 +62,12 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         
     }
     
-    @objc func deletePop() {
+    @objc func deletePop(_notification : Notification) {
         let alert = UIAlertController(title: "Delete Pin", message: "Are you sure?", preferredStyle: .alert)
         let yesButton = UIAlertAction(title: "Yes", style: .default) {(action) in
+            let recText = _notification.userInfo?["Text"] as? String
+            var resultArray = recText?.split(separator: "%")
+            self.deletePin(PinName: String(resultArray![0]), PinAddress: String(resultArray![1]))
             
         }
         let noButton = UIAlertAction(title: "No", style: .default) {(action) in
@@ -73,6 +76,9 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         alert.addAction(yesButton)
         alert.addAction(noButton)
         self.present(alert, animated: true, completion: nil)
+        
+        
+        
     }
     
     func loadUserPins(){
@@ -188,8 +194,9 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     @IBAction func DismissMenuByTap(_ sender: Any) {
         self.HideMenu()
     }
-    func deletePin(PinNumber: Int, PinName: String, PinAddress: String){
-        print("Delete: ",PinNumber, " ", PinName, " ", PinAddress)
+    func deletePin(PinName: String, PinAddress: String){
+        print("Delete: ", PinName, " ", PinAddress)
+        
         
         //Find Item
         do{
@@ -209,8 +216,9 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         refresh()
     }
     func delete(Pin: Int, PinName: String, PinAddress: String) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "delete"), object: nil)
-        self.deletePin(PinNumber: Pin, PinName: PinName, PinAddress: PinAddress)
+        let strings = ["Text" : PinName+"%"+PinAddress]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "delete"), object: nil, userInfo: strings)
+        //self.deletePin(PinNumber: Pin, PinName: PinName, PinAddress: PinAddress)
     }
     
     func refresh(){

@@ -45,6 +45,7 @@
 		2FA6455126ADC915004E3365 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA6454F26ADC915004E3365 /* LaunchScreen.storyboard */; };
 		2FC599872732EC3300FFFF78 /* PiNNiT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599852732EC3300FFFF78 /* PiNNiT.xcdatamodeld */; };
 		2FC599B02732F10000FFFF78 /* Pins+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599AF2732F10000FFFF78 /* Pins+CoreDataClass.swift */; };
+		2FC599B4273B3E3700FFFF78 /* MyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599B3273B3E3700FFFF78 /* MyFriendsViewController.swift */; };
 		75C1D2FB2A8D0FC3B0089C45 /* Pods_PiNNiT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3C38AF7A25C72D9A1F84DD /* Pods_PiNNiT.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		2FA6455226ADC915004E3365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FC599862732EC3300FFFF78 /* PiNNiT.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PiNNiT.xcdatamodel; sourceTree = "<group>"; };
 		2FC599AF2732F10000FFFF78 /* Pins+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Pins+CoreDataClass.swift"; path = "/Users/demaio/Documents/Git/PiNNiT/PiNNiT/Helper/Pins+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		2FC599B3273B3E3700FFFF78 /* MyFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsViewController.swift; sourceTree = "<group>"; };
 		766CBB661DBA2486140C0E8D /* Pods-PiNNiT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.release.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.release.xcconfig"; sourceTree = "<group>"; };
 		97EB4A7871DD444D5C3158C0 /* Pods-PiNNiT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.debug.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.debug.xcconfig"; sourceTree = "<group>"; };
 		BD3C38AF7A25C72D9A1F84DD /* Pods_PiNNiT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiNNiT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 				2FA6454826ADC913004E3365 /* ViewController.swift */,
 				2F8B33D426C0836600843E01 /* SlideMenuViewController.swift */,
 				2F8B33EE26D7225400843E01 /* MyPinsViewController.swift */,
+				2FC599B3273B3E3700FFFF78 /* MyFriendsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				2F46487C26B0C84700136DAF /* LoginViewController.swift in Sources */,
 				2F8B33B626BDD1A900843E01 /* Utilities.swift in Sources */,
 				2FA6454726ADC913004E3365 /* SceneDelegate.swift in Sources */,
+				2FC599B4273B3E3700FFFF78 /* MyFriendsViewController.swift in Sources */,
 				2F8B33ED26C7071300843E01 /* DropDownCell.swift in Sources */,
 				2F46487E26B0C85400136DAF /* HomeViewController.swift in Sources */,
 			);

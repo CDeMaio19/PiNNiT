@@ -62,7 +62,7 @@ class SlideMenuViewController: UIViewController {
         
         
         
-        self.NameLabel.text = CurUsr.FirstName+" "+CurUsr.LastName
+        self.NameLabel.text = "     "+CurUsr.FirstName+" "+CurUsr.LastName+"   "
         
     }
     @IBAction func ExitButtonTapped(_ sender: Any) {
@@ -94,6 +94,16 @@ class SlideMenuViewController: UIViewController {
         }
     }
     @IBAction func FreindsButtonTapped(_ sender: Any) {
+        if String(self.delegate.debugDescription).contains("PiNNiT.MyFriendsViewController")
+        {
+            self.delegate?.HideMenuView()
+        } else {
+        self.delegate?.HideMenuView()
+        let FriendsVC = storyboard?.instantiateViewController(identifier: "MyFriendsVC") as? MyFriendsViewController
+        
+        view.window?.rootViewController = FriendsVC
+        view.window?.makeKeyAndVisible()
+        }
     }
     @IBAction func settingButtonTapped(_ sender: Any) {
     }
