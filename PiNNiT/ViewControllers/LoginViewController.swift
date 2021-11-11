@@ -115,15 +115,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if error != nil{
                     Help.Show(self.ErrorTF, "Invalid Email or Password")
                 } else {
-                    self.TransitionHome()
                     do{
                         let req = Users.fetchRequest() as NSFetchRequest<Users>
-                        let pred = NSPredicate(format: "email CONTAINS %@", Email)
+                        let pred = NSPredicate(format: "email == %@", Email)
                         req.predicate = pred
                         let UserA = try self.context.fetch(req)
                         UserA[0].isActive = true
                         self.saveCoreData()
-                        
                         do{
                             let req = Users.fetchRequest() as NSFetchRequest<Users>
                             let pred = NSPredicate(format: "isActive == YES")
@@ -139,6 +137,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             }
                             }catch{
                             }
+                        self.TransitionHome()
                         
                     }
                     catch {

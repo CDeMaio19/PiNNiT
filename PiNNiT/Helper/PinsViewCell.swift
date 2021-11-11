@@ -26,6 +26,7 @@ class PinsViewCell: UITableViewCell{
         // Initialization code
     }
     @IBAction func TagButtonTapped(_ sender: Any) {
+        
     }
     @IBAction func PublicButtonTapped(_ sender: Any) {
         if (PublicButton.title(for: .normal)! == "Make Public"){
@@ -36,13 +37,16 @@ class PinsViewCell: UITableViewCell{
     }
     @IBAction func DeleteButtonTapped(_ sender: Any) {
         let PinNumber:Int? = Int(PinIDLabel.text!)
-        self.delegate?.delete(Pin: PinNumber!, PinName: NameET.text!, PinAddress: AddressET.text!)
+        self.delegate?.delete(Pin: 0, PinName: NameET.text!, PinAddress: AddressET.text!)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+    }
+    @IBAction func DidEndNameEdit(_ sender: Any) {
+        print("Editing Done......")
+        self.delegate?.delete(Pin: 1, PinName: NameET.text!, PinAddress: AddressET.text!)
     }
     
 }

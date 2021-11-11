@@ -13,6 +13,7 @@
         <attribute name="creator" optional="YES" attributeType="String"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="friends" optional="YES" attributeType="Transformable" customClassName="Array&lt;Any&gt;"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="password" optional="YES" attributeType="String"/>
@@ -20,6 +21,6 @@
     </entity>
     <elements>
         <element name="Pins" positionX="-63" positionY="-18" width="128" height="134"/>
-        <element name="Users" positionX="-54" positionY="45" width="128" height="134"/>
+        <element name="Users" positionX="-54" positionY="45" width="128" height="149"/>
     </elements>
 </model>

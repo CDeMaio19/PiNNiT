@@ -35,7 +35,9 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
     }*/
-    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var CoreDataPins:[Pins]?
+    var CoreDataUser:[Users]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +48,70 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
 
         In(desiredView: BlurView)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
+            self.fetchCoreData()
+            self.setUser()
             self.animateOut(desiredView: self.BlurView)
             }
         // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(FriendsPop), name: NSNotification.Name(rawValue: "Friends"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+    }
+    @objc func loadList(notification: NSNotification){
+        In(desiredView: BlurView)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            self.fetchCoreData()
+            self.TableView.reloadData()
+            self.animateOut(desiredView: self.BlurView)
+            }
+    }
+    func loadUserPins(){
+        dump(CoreDataPins)
+        var i = 0
+        for element in CoreDataPins! {
+            if element.creator != CurUsr.ID {
+                CoreDataPins!.remove(at: i)
+                i=i-1
+            }else{
+            }
+            i=i+1
+        }
     }
     
+    func setUser(){
+        do{
+            let req = Users.fetchRequest() as NSFetchRequest<Users>
+            let pred = NSPredicate(format: "isActive == YES")
+            req.predicate = pred
+            let ActiveUser = try context.fetch(req)
+            CurUsr.FirstName = ActiveUser[0].firstName!
+            CurUsr.LastName = ActiveUser[0].lastName!
+            CurUsr.ID = ActiveUser[0].creator!
+            CurUsr.Email = ActiveUser[0].email!
+            }catch{
+            }
+            
+        }
+    func refresh(){
+            self.fetchCoreData()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+    }
+    func saveCoreData() {
+        do {
+            try self.context.save()
+        } catch{
+            
+        }
+    }
+    func fetchCoreData() {
+        do{
+            self.CoreDataPins = try context.fetch(Pins.fetchRequest())
+            self.CoreDataUser = try context.fetch(Users.fetchRequest())
+        } catch {
+            
+        }
+        
+    }
     func HideMenuView() {
         self.HideMenu()
         print("exit")
@@ -121,11 +182,39 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
         desiredView.alpha = 0.9
         desiredView.center = backroundView.center
         desiredView.layer.cornerRadius = 50
-        
     }
     @IBAction func AddFriendButton(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Friends"), object: nil)
     }
-    
+    @objc func FriendsPop(_notification : Notification) {
+        let alert = UIAlertController(title: "Add Friend?", message: "Enter email.", preferredStyle: .alert)
+        alert.addTextField()
+        let textfield = alert.textFields![0]
+        textfield.placeholder = "someone@company.com"
+        let DoneButton = UIAlertAction(title: "Add", style: .default) {(action) in
+            let friendEmail = textfield.text
+            do{
+            let req = Users.fetchRequest() as NSFetchRequest<Users>
+                let pred = NSPredicate(format: "email == %@", friendEmail!)
+            req.predicate = pred
+                let PotentalUser = try self.context.fetch(req)
+                if (PotentalUser.count > 0){
+                print("Name: ", PotentalUser[0].firstName)
+                self.saveCoreData()
+                }
+                else{
+                    //Popup User Not Found OK?
+                }
+                
+            }
+            catch {
+                
+        }
+            self.refresh()
+        }
+        alert.addAction(DoneButton)
+        self.present(alert, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

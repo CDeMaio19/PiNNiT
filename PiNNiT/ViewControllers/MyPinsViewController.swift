@@ -63,7 +63,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     }
     
     @objc func deletePop(_notification : Notification) {
-        let alert = UIAlertController(title: "Delete Pin", message: "Are you sure?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Delete Pin?", message: "Are you sure?", preferredStyle: .alert)
         let yesButton = UIAlertAction(title: "Yes", style: .default) {(action) in
             let recText = _notification.userInfo?["Text"] as? String
             var resultArray = recText?.split(separator: "%")
@@ -80,8 +80,17 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         
         
     }
-    
+    @objc func loadList(notification: NSNotification){
+        In(desiredView: BlurView)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            self.fetchCoreData()
+            self.TableView.reloadData()
+            self.animateOut(desiredView: self.BlurView)
+            }
+    }
     func loadUserPins(){
+        print("User ID: ", CurUsr.ID)
+        print("Pins: ")
         dump(CoreDataPins)
         var i = 0
         for element in CoreDataPins! {
@@ -92,6 +101,8 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
             }
             i=i+1
         }
+        print("Pins: ")
+        dump(CoreDataPins)
     }
     
     func setUser(){
@@ -108,15 +119,6 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
             }
             
         }
-        
-    @objc func loadList(notification: NSNotification){
-        In(desiredView: BlurView)
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
-            self.fetchCoreData()
-            self.TableView.reloadData()
-            self.animateOut(desiredView: self.BlurView)
-            }
-    }
     
     func animateOut(desiredView: UIView){
         UIView.animate(withDuration: 0.3, animations: {
@@ -151,6 +153,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
     }
     func HideMenuView() {
         self.HideMenu()
+        self.saveCoreData()
         
     }
     private func HideMenu() {
@@ -201,7 +204,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         //Find Item
         do{
         let req = Pins.fetchRequest() as NSFetchRequest<Pins>
-        let pred = NSPredicate(format: "(name CONTAINS %@) AND (address CONTAINS %@)", PinName, PinAddress)
+        let pred = NSPredicate(format: "(name == %@) AND (address == %@)", PinName, PinAddress)
         req.predicate = pred
             
         let delPin = try context.fetch(req)
@@ -216,8 +219,25 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         refresh()
     }
     func delete(Pin: Int, PinName: String, PinAddress: String) {
+        if (Pin == 0){
         let strings = ["Text" : PinName+"%"+PinAddress]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "delete"), object: nil, userInfo: strings)
+        } else {
+            do{
+            let req = Pins.fetchRequest() as NSFetchRequest<Pins>
+            let pred = NSPredicate(format: "address == %@", PinAddress)
+            req.predicate = pred
+            let namePin = try context.fetch(req)
+                namePin[0].name = PinName
+            dump(namePin[0].name)
+            
+            saveCoreData()
+                
+            }
+            catch {
+                
+        }
+        }
         //self.deletePin(PinNumber: Pin, PinName: PinName, PinAddress: PinAddress)
     }
     
@@ -230,6 +250,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         do{
             self.CoreDataPins = try context.fetch(Pins.fetchRequest())
             self.CoreDataUser = try context.fetch(Users.fetchRequest())
+            self.loadUserPins()
         } catch {
             
         }
@@ -285,9 +306,8 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         cell.PublicButton.setTitle("Make Public", for: .normal)
         }
         cell.PinIDLabel.text = String(indexPath.row)
-        //dump(cell)
         return cell
-        
-        
     }
+    
+    
 }
