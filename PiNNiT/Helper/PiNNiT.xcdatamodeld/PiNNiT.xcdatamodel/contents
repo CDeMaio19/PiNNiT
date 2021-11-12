@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Friends" representedClassName="Friends" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="friendID" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="freinds" inverseEntity="Users"/>
+    </entity>
     <entity name="Pins" representedClassName="Pins" syncable="YES" codeGenerationType="category">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="creator" optional="YES" attributeType="String"/>
@@ -13,14 +19,14 @@
         <attribute name="creator" optional="YES" attributeType="String"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
-        <attribute name="friends" optional="YES" attributeType="Transformable" customClassName="Array&lt;Any&gt;"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="password" optional="YES" attributeType="String"/>
-        <relationship name="pins" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Pins"/>
+        <relationship name="freinds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Friends" inverseName="user" inverseEntity="Friends"/>
     </entity>
     <elements>
         <element name="Pins" positionX="-63" positionY="-18" width="128" height="134"/>
-        <element name="Users" positionX="-54" positionY="45" width="128" height="149"/>
+        <element name="Users" positionX="-54" positionY="45" width="128" height="134"/>
+        <element name="Friends" positionX="-45" positionY="90" width="128" height="89"/>
     </elements>
 </model>

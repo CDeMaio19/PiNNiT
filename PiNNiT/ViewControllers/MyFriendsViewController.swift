@@ -56,6 +56,20 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
         
         NotificationCenter.default.addObserver(self, selector: #selector(FriendsPop), name: NSNotification.Name(rawValue: "Friends"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        printFriends()
+    }
+    func printFriends(){
+        do{
+        let req = Users.fetchRequest() as NSFetchRequest<Users>
+        let pred = NSPredicate(format: "isActive == YES")
+        req.predicate = pred
+        let ActiveUser = try context.fetch(req)
+        print("Friends: ")
+            dump(ActiveUser[0].freinds?.count)
+        }catch{
+            
+        }
+        
     }
     @objc func loadList(notification: NSNotification){
         In(desiredView: BlurView)
@@ -195,15 +209,31 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
             let friendEmail = textfield.text
             do{
             let req = Users.fetchRequest() as NSFetchRequest<Users>
-                let pred = NSPredicate(format: "email == %@", friendEmail!)
+                let pred = NSPredicate(format: "email LIKE[cd] %@", friendEmail!)
             req.predicate = pred
                 let PotentalUser = try self.context.fetch(req)
                 if (PotentalUser.count > 0){
+                    if (PotentalUser[0].email != self.CurUsr.Email){
                 print("Name: ", PotentalUser[0].firstName)
                 self.saveCoreData()
+                    let alert = UIAlertController(title: PotentalUser[0].firstName! + " Found.", message: "Added to friends.", preferredStyle: .alert)
+                    let OkayButton = UIAlertAction(title: "Okay", style: .default)
+                    alert.addAction(OkayButton)
+                    self.present(alert, animated: true, completion: nil)
+                        self.addFriend(FirstName: PotentalUser[0].firstName!, LastName: PotentalUser[0].lastName!, Email: PotentalUser[0].email!, ID: PotentalUser[0].creator!)
+                    } else {
+                        let alert = UIAlertController(title: "User Not Found.", message: "Try again.", preferredStyle: .alert)
+                        let OkayButton = UIAlertAction(title: "Okay", style: .default)
+                        alert.addAction(OkayButton)
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
                 else{
-                    //Popup User Not Found OK?
+                    let alert = UIAlertController(title: "User Not Found.", message: "Try again.", preferredStyle: .alert)
+                    let OkayButton = UIAlertAction(title: "Okay", style: .default)
+                    alert.addAction(OkayButton)
+                    self.present(alert, animated: true, completion: nil)
+                    
                 }
                 
             }
@@ -214,6 +244,44 @@ class MyFriendsViewController: UIViewController, SlideMenuViewControllerDelegate
         }
         alert.addAction(DoneButton)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func addFriend(FirstName: String, LastName: String, Email: String, ID: String){
+        do{
+        let Friend = Friends(context: context)
+            Friend.name = FirstName + " " + LastName
+            Friend.email = Email
+            Friend.friendID = ID
+        let req = Users.fetchRequest() as NSFetchRequest<Users>
+        let pred = NSPredicate(format: "isActive == YES")
+        req.predicate = pred
+        let ActiveUser = try context.fetch(req)
+            if (ActiveUser[0].freinds!.count > 0){
+                print("More than 1")
+                if((ActiveUser[0].freinds?.contains(Friend.email)) != nil){
+                    print("Found")
+                    self.dismiss(animated: true, completion: {
+                        let alert = UIAlertController(title: "Friend Already Added!", message: "Cannot add friend.", preferredStyle: .alert)
+                        let OkayButton = UIAlertAction(title: "Okay", style: .default)
+                        alert.addAction(OkayButton)
+                         self.present(alert, animated: true, completion: nil)
+                    })
+                    
+                } else {
+                    ActiveUser[0].addToFreinds(Friend)
+                    print("Friends: ")
+                    dump(ActiveUser[0].freinds?.count)
+                    saveCoreData()
+                }
+            }else{
+            ActiveUser[0].addToFreinds(Friend)
+            print("Friends: ")
+            dump(ActiveUser[0].freinds?.count)
+            saveCoreData()
+            }
+        }catch{
+            
+        }
     }
     /*
     // MARK: - Navigation

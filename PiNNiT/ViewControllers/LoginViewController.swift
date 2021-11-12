@@ -127,7 +127,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         }
                         //Reset Active User
                         let req2 = Users.fetchRequest() as NSFetchRequest<Users>
-                        let pred2 = NSPredicate(format: "email == %@", Email)
+                        let pred2 = NSPredicate(format: "email LIKE[cd] %@", Email)
                         req2.predicate = pred2
                         let UserA = try self.context.fetch(req2)
                         UserA[0].isActive = true
