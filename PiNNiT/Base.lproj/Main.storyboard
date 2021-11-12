@@ -620,7 +620,7 @@
         <!--Navigation Controller-->
         <scene sceneID="D7p-zl-7Em">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Gxe-VN-Afn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavID" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Gxe-VN-Afn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uV0-Nh-8nM">
                         <autoresizingMask key="autoresizingMask"/>

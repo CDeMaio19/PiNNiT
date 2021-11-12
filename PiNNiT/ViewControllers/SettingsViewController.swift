@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseCore
+import MapKit
+import CoreLocation
+import BLTNBoard
+import CoreData
 
 class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
     
@@ -20,6 +27,11 @@ class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
     @IBOutlet weak var MenuView: UIView!
     @IBOutlet weak var MenuButton: UIButton!
 
+    //Core Data
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var CoreDataPins:[Pins]?
+    var CoreDataUser:[Users]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,6 +59,32 @@ class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
                 self.SlideMenuViewController?.delegate = self
             }
         }
+    }
+    func setUser(){
+        do{
+            let req = Users.fetchRequest() as NSFetchRequest<Users>
+            let pred = NSPredicate(format: "isActive == YES")
+            req.predicate = pred
+            let ActiveUser = try context.fetch(req)
+            CurUsr.FirstName = ActiveUser[0].firstName!
+            CurUsr.LastName = ActiveUser[0].lastName!
+            CurUsr.ID = ActiveUser[0].creator!
+            CurUsr.Email = ActiveUser[0].email!
+            print("ActiveUser:")
+            dump(ActiveUser)
+            }catch{
+            }
+            
+        }
+    func signOutUser(){
+        do{
+            let req = Users.fetchRequest() as NSFetchRequest<Users>
+            let pred = NSPredicate(format: "isActive == YES")
+            req.predicate = pred
+            let ActiveUser = try context.fetch(req)
+            ActiveUser[0].isActive = false
+            }catch{
+            }
     }
     private func HideMenu() {
         
@@ -105,8 +143,23 @@ class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
         
     }
     @IBAction func SignOutButtonTapped(_ sender: Any) {
+        signOutUser()
+        Transition()
+        
     }
-    
+    func Transition(){
+        
+        //self.navigationController?.popViewController(animated: true)In(desiredView: BlurView)
+        In(desiredView: BlurView)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            self.animateOut(desiredView: self.BlurView)
+            let NavVC = self.storyboard?.instantiateViewController(identifier: "NavID") as? UINavigationController
+            
+            self.view.window?.rootViewController = NavVC
+            self.view.window?.makeKeyAndVisible()
+            }
+        
+    }
     /*
     // MARK: - Navigation
 

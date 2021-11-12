@@ -117,26 +117,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     do{
                         let req = Users.fetchRequest() as NSFetchRequest<Users>
-                        let pred = NSPredicate(format: "email == %@", Email)
+                        let pred = NSPredicate(format: "isActive == YES")
                         req.predicate = pred
-                        let UserA = try self.context.fetch(req)
+                        let ActiveUser = try self.context.fetch(req)
+                        print("ActiveUser:")
+                        dump(ActiveUser)
+                        if ActiveUser.count > 0 {
+                            ActiveUser[0].isActive = false
+                        }
+                        //Reset Active User
+                        let req2 = Users.fetchRequest() as NSFetchRequest<Users>
+                        let pred2 = NSPredicate(format: "email == %@", Email)
+                        req2.predicate = pred2
+                        let UserA = try self.context.fetch(req2)
                         UserA[0].isActive = true
+                        print("ActiveUser:")
+                        dump(UserA)
+                        
                         self.saveCoreData()
-                        do{
-                            let req = Users.fetchRequest() as NSFetchRequest<Users>
-                            let pred = NSPredicate(format: "isActive == YES")
-                            req.predicate = pred
-                            let ActiveUser = try self.context.fetch(req)
-                            print("ActiveUser:")
-                            dump(ActiveUser)
-                            if ActiveUser.count > 1 {
-                            if ActiveUser[0].isActive == true {
-                                ActiveUser[0].isActive = false
-                                self.saveCoreData()
-                            }
-                            }
-                            }catch{
-                            }
+                        
                         self.TransitionHome()
                         
                     }

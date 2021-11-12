@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        //self.navigationController?.popViewController(animated: true)
         Utilities.styleHollowButton(LoginButton)
         Utilities.styleFilledButton(SignUpButton)
     }

@@ -117,6 +117,8 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             CurUsr.LastName = ActiveUser[0].lastName!
             CurUsr.ID = ActiveUser[0].creator!
             CurUsr.Email = ActiveUser[0].email!
+            print("ActiveUserAfter:")
+            dump(ActiveUser)
             }catch{
             }
             
