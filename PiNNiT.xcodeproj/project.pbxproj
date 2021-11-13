@@ -47,6 +47,8 @@
 		2FC599B02732F10000FFFF78 /* Pins+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599AF2732F10000FFFF78 /* Pins+CoreDataClass.swift */; };
 		2FC599B4273B3E3700FFFF78 /* MyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599B3273B3E3700FFFF78 /* MyFriendsViewController.swift */; };
 		2FC599B6273B6B0600FFFF78 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599B5273B6B0600FFFF78 /* SettingsViewController.swift */; };
+		2FC599B9273F194300FFFF78 /* FriendViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599B7273F194300FFFF78 /* FriendViewCell.swift */; };
+		2FC599BA273F194400FFFF78 /* FriendViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC599B8273F194300FFFF78 /* FriendViewCell.xib */; };
 		75C1D2FB2A8D0FC3B0089C45 /* Pods_PiNNiT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3C38AF7A25C72D9A1F84DD /* Pods_PiNNiT.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,8 @@
 		2FC599AF2732F10000FFFF78 /* Pins+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Pins+CoreDataClass.swift"; path = "/Users/demaio/Documents/Git/PiNNiT/PiNNiT/Helper/Pins+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		2FC599B3273B3E3700FFFF78 /* MyFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsViewController.swift; sourceTree = "<group>"; };
 		2FC599B5273B6B0600FFFF78 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2FC599B7273F194300FFFF78 /* FriendViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewCell.swift; sourceTree = "<group>"; };
+		2FC599B8273F194300FFFF78 /* FriendViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendViewCell.xib; sourceTree = "<group>"; };
 		766CBB661DBA2486140C0E8D /* Pods-PiNNiT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.release.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.release.xcconfig"; sourceTree = "<group>"; };
 		97EB4A7871DD444D5C3158C0 /* Pods-PiNNiT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.debug.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.debug.xcconfig"; sourceTree = "<group>"; };
 		BD3C38AF7A25C72D9A1F84DD /* Pods_PiNNiT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiNNiT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +141,8 @@
 				2F8B33F426D86C0C00843E01 /* PinsViewCell.swift */,
 				2F8B33F526D86C0C00843E01 /* PinsViewCell.xib */,
 				2FC599852732EC3300FFFF78 /* PiNNiT.xcdatamodeld */,
+				2FC599B7273F194300FFFF78 /* FriendViewCell.swift */,
+				2FC599B8273F194300FFFF78 /* FriendViewCell.xib */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 				2F8B33C926C07AA400843E01 /* Friends@3x.png in Resources */,
 				2F8B33E326C1D91E00843E01 /* MapV@3x.png in Resources */,
 				2F8B33CF26C07CD900843E01 /* Title@3x.png in Resources */,
+				2FC599BA273F194400FFFF78 /* FriendViewCell.xib in Resources */,
 				2F8B33E926C1DB3C00843E01 /* Map.png in Resources */,
 				2F8B33E526C1DA6B00843E01 /* FriendsV@3x.png in Resources */,
 				2F8B33DD26C0D14400843E01 /* World View@3x.png in Resources */,
@@ -358,6 +365,7 @@
 				2FC599872732EC3300FFFF78 /* PiNNiT.xcdatamodeld in Sources */,
 				2FA6454926ADC913004E3365 /* ViewController.swift in Sources */,
 				2FA6454526ADC913004E3365 /* AppDelegate.swift in Sources */,
+				2FC599B9273F194300FFFF78 /* FriendViewCell.swift in Sources */,
 				2F46487A26B0C83100136DAF /* SignUpViewController.swift in Sources */,
 				2F27855626B385C7002ED473 /* User.swift in Sources */,
 				2F8B33D526C0836600843E01 /* SlideMenuViewController.swift in Sources */,

@@ -853,21 +853,6 @@
         <!--My Friends View Controller-->
         <scene sceneID="wtT-wh-0sI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1bf-uM-MZm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ddC-qo-df4">
-                    <connections>
-                        <action selector="DismissMenuByTap:" destination="L8F-e1-ni3" id="h6K-Hi-cHC"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" id="A0W-rS-dXI">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nqy-iQ-qjb">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <blurEffect style="regular"/>
-                </visualEffectView>
                 <viewController storyboardIdentifier="MyFriendsVC" id="L8F-e1-ni3" customClass="MyFriendsViewController" customModule="PiNNiT" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qDU-OE-8Hy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -966,27 +951,27 @@
                         <outlet property="TableView" destination="l04-t3-Rhd" id="qHP-Mb-a7E"/>
                     </connections>
                 </viewController>
-            </objects>
-            <point key="canvasLocation" x="4646" y="45"/>
-        </scene>
-        <!--Settings View Controller-->
-        <scene sceneID="8hz-xb-IRk">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="m4o-Ay-DrQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="uSr-l5-kWy">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1bf-uM-MZm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ddC-qo-df4">
                     <connections>
-                        <action selector="DismissMenuByTap:" destination="fum-O3-9FF" id="bce-tV-OEi"/>
+                        <action selector="DismissMenuByTap:" destination="L8F-e1-ni3" id="h6K-Hi-cHC"/>
                     </connections>
                 </tapGestureRecognizer>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" id="Psb-QD-jBu">
+                <visualEffectView opaque="NO" contentMode="scaleToFill" id="A0W-rS-dXI">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hi4-xU-0Ck">
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nqy-iQ-qjb">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <blurEffect style="regular"/>
                 </visualEffectView>
+            </objects>
+            <point key="canvasLocation" x="4644.927536231884" y="44.866071428571423"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="8hz-xb-IRk">
+            <objects>
                 <viewController storyboardIdentifier="SettingsVC" id="fum-O3-9FF" customClass="SettingsViewController" customModule="PiNNiT" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hCv-PK-aAr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -1078,6 +1063,21 @@
                         <outlet property="MenuView" destination="eBB-pl-XpM" id="DlI-AM-PRg"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m4o-Ay-DrQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="uSr-l5-kWy">
+                    <connections>
+                        <action selector="DismissMenuByTap:" destination="fum-O3-9FF" id="bce-tV-OEi"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" id="Psb-QD-jBu">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hi4-xU-0Ck">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="regular"/>
+                </visualEffectView>
             </objects>
             <point key="canvasLocation" x="5493" y="45"/>
         </scene>

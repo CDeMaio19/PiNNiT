@@ -77,6 +77,8 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     var CoreDataPins:[Pins]?
     var CoreDataUser:[Users]?
     
+    var MyFriends = [Friends()]
+    
     
     
     override func viewDidLoad() {
@@ -99,12 +101,24 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         
         fetchCoreData()
         setUser()
-        loadCorePins()
+        loadMyCorePins()
         
         NavButton.sendActions(for: .touchUpInside)
         /*DispatchQueue.main.asyncAfter(deadline: .now()+1.0){
             self.LoadCoreData()
         }*/
+        setFriends()
+    }
+    
+    func setFriends() {
+        do{
+        let req = Users.fetchRequest() as NSFetchRequest<Users>
+        let pred = NSPredicate(format: "isActive == YES")
+        req.predicate = pred
+        let ActiveUser = try context.fetch(req)
+        MyFriends = ActiveUser[0].freinds?.allObjects as! [Friends]
+        }catch{
+        }
     }
     
     func setUser(){
@@ -186,18 +200,21 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         FPB = 1
         WPB = 0
         BottomMenuState()
+        loadMyFriendsPins()
     }
     @IBAction func MyButtonViewPressed(_ sender: Any) {
         MPB = 1
         FPB = 0
         WPB = 0
         BottomMenuState()
+        loadMyCorePins()
     }
     @IBAction func WorldButtonViewPressed(_ sender: Any) {
         MPB = 0
         FPB = 0
         WPB = 1
         BottomMenuState()
+        loadWorldPins()
     }
     
     func BottomMenuState(){
@@ -535,11 +552,12 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     
 //Core Data
     
-    func loadCorePins(){
+    func loadMyCorePins(){
+        let allAnnotations = self.MapView.annotations
+        self.MapView.removeAnnotations(allAnnotations)
         var i = 0
         for element in CoreDataPins! {
             if element.creator != CurUsr.ID {
-                CoreDataPins!.remove(at: i)
                 i=i-1
             }else{
             let location = CLLocationCoordinate2D(latitude: element.lat, longitude: element.lon)
@@ -553,6 +571,38 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         }
         
     }
+    
+    func loadMyFriendsPins(){
+        let allAnnotations = self.MapView.annotations
+        self.MapView.removeAnnotations(allAnnotations)
+        var i = 0
+        for element in CoreDataPins! {
+            if element.creator == CurUsr.ID {
+                i=i-1
+            }else{
+            let location = CLLocationCoordinate2D(latitude: element.lat, longitude: element.lon)
+            let pin = MKPointAnnotation()
+            pin.coordinate = location
+            pin.title = element.name
+            pin.subtitle = element.address
+            self.MapView.addAnnotation(pin)
+            }
+            i=i+1
+        }
+    }
+    
+    func loadWorldPins(){
+        let allAnnotations = self.MapView.annotations
+        self.MapView.removeAnnotations(allAnnotations)
+        for element in CoreDataPins! {
+            let location = CLLocationCoordinate2D(latitude: element.lat, longitude: element.lon)
+            let pin = MKPointAnnotation()
+            pin.coordinate = location
+            pin.title = element.name
+            pin.subtitle = element.address
+            self.MapView.addAnnotation(pin)
+            }
+        }
     
     func fetchCoreData() {
         do{
