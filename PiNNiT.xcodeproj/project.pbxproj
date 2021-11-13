@@ -49,6 +49,8 @@
 		2FC599B6273B6B0600FFFF78 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599B5273B6B0600FFFF78 /* SettingsViewController.swift */; };
 		2FC599B9273F194300FFFF78 /* FriendViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC599B7273F194300FFFF78 /* FriendViewCell.swift */; };
 		2FC599BA273F194400FFFF78 /* FriendViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC599B8273F194300FFFF78 /* FriendViewCell.xib */; };
+		2FC599BC273F54D600FFFF78 /* MenuWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC599BB273F54D500FFFF78 /* MenuWhite@3x.png */; };
+		2FC599BE273F563600FFFF78 /* MenuW@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC599BD273F563600FFFF78 /* MenuW@3x.png */; };
 		75C1D2FB2A8D0FC3B0089C45 /* Pods_PiNNiT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3C38AF7A25C72D9A1F84DD /* Pods_PiNNiT.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +99,8 @@
 		2FC599B5273B6B0600FFFF78 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		2FC599B7273F194300FFFF78 /* FriendViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewCell.swift; sourceTree = "<group>"; };
 		2FC599B8273F194300FFFF78 /* FriendViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendViewCell.xib; sourceTree = "<group>"; };
+		2FC599BB273F54D500FFFF78 /* MenuWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MenuWhite@3x.png"; path = "../../../../Logo/MenuWhite@3x.png"; sourceTree = "<group>"; };
+		2FC599BD273F563600FFFF78 /* MenuW@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MenuW@3x.png"; path = "../../../../MenuW@3x.png"; sourceTree = "<group>"; };
 		766CBB661DBA2486140C0E8D /* Pods-PiNNiT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.release.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.release.xcconfig"; sourceTree = "<group>"; };
 		97EB4A7871DD444D5C3158C0 /* Pods-PiNNiT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiNNiT.debug.xcconfig"; path = "Target Support Files/Pods-PiNNiT/Pods-PiNNiT.debug.xcconfig"; sourceTree = "<group>"; };
 		BD3C38AF7A25C72D9A1F84DD /* Pods_PiNNiT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiNNiT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +154,7 @@
 		2F8B33BF26C07A0C00843E01 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2FC599BB273F54D500FFFF78 /* MenuWhite@3x.png */,
 				2F8B33F226D8566E00843E01 /* Logo@3x.png */,
 				2F8B33F026D83C4700843E01 /* Home@3x.png */,
 				2F8B33DA26C0B21700843E01 /* Nav.png */,
@@ -167,6 +172,7 @@
 				2F8B33DE26C0D14D00843E01 /* Friend View@3x.png */,
 				2F8B33E026C0D15500843E01 /* My View@3x.png */,
 				2F8B33E226C1D91E00843E01 /* MapV@3x.png */,
+				2FC599BD273F563600FFFF78 /* MenuW@3x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 				2FA6455126ADC915004E3365 /* LaunchScreen.storyboard in Resources */,
 				2F8B33F726D86C0C00843E01 /* PinsViewCell.xib in Resources */,
 				2F8B33E726C1DA7700843E01 /* World@3x.png in Resources */,
+				2FC599BC273F54D600FFFF78 /* MenuWhite@3x.png in Resources */,
 				2F8B33DF26C0D14E00843E01 /* Friend View@3x.png in Resources */,
 				2F8B33DB26C0B21700843E01 /* Nav.png in Resources */,
 				2F46488326B0D3B600136DAF /* GoogleService-Info.plist in Resources */,
@@ -294,6 +301,7 @@
 				2F8B33C926C07AA400843E01 /* Friends@3x.png in Resources */,
 				2F8B33E326C1D91E00843E01 /* MapV@3x.png in Resources */,
 				2F8B33CF26C07CD900843E01 /* Title@3x.png in Resources */,
+				2FC599BE273F563600FFFF78 /* MenuW@3x.png in Resources */,
 				2FC599BA273F194400FFFF78 /* FriendViewCell.xib in Resources */,
 				2F8B33E926C1DB3C00843E01 /* Map.png in Resources */,
 				2F8B33E526C1DA6B00843E01 /* FriendsV@3x.png in Resources */,

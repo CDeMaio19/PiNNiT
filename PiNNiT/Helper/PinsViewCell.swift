@@ -14,7 +14,7 @@ protocol PinsViewCellDelegate {
 class PinsViewCell: UITableViewCell{
     var delegate : PinsViewCellDelegate?
     @IBOutlet weak var NameET: UITextField!
-    @IBOutlet weak var AddressET: UITextField!
+    @IBOutlet weak var AddressET: UILabel!
     @IBOutlet weak var TagButton: UIButton!
     @IBOutlet weak var PublicButton: UIButton!
     @IBOutlet weak var DeleteButton: UIButton!

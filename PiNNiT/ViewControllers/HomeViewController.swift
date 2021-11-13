@@ -576,10 +576,11 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         let allAnnotations = self.MapView.annotations
         self.MapView.removeAnnotations(allAnnotations)
         var i = 0
+        for friends in MyFriends {
         for element in CoreDataPins! {
             if element.creator == CurUsr.ID {
                 i=i-1
-            }else{
+            }else if (element.creator == friends.friendID){
             let location = CLLocationCoordinate2D(latitude: element.lat, longitude: element.lon)
             let pin = MKPointAnnotation()
             pin.coordinate = location
@@ -588,6 +589,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             self.MapView.addAnnotation(pin)
             }
             i=i+1
+        }
         }
     }
     
