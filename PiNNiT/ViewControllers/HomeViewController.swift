@@ -80,7 +80,6 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     var MyFriends = [Friends()]
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -363,7 +362,20 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         else{
             annotationView?.annotation = annotation
         }
-        annotationView?.image = UIImage(named: "Pin@3x.png")
+        
+        switch annotation.subtitle {
+        case "House":
+            annotationView?.image = UIImage(named:"House@3x")
+        case "Point of Intrest":
+            annotationView?.image = UIImage(named:"POI@3x")
+        case "Park":
+            annotationView?.image = UIImage(named:"Park@3x")
+        case "Resturant":
+            annotationView?.image = UIImage(named:"Rest@3x")
+        default:
+            annotationView?.image = UIImage(named: "Pin@3x.png")
+        }
+        
         return annotationView
     }
     @IBAction func CheckButtonClicked(_ sender: Any) {
@@ -397,7 +409,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         let pin = MKPointAnnotation()
         pin.coordinate = Cordinates
         pin.title = PinNameET.text
-        pin.subtitle = PinAddressET.text
+        pin.subtitle = PinTag.description
         MapView.addAnnotation(pin)
         MyPins.append(Pin(name: PinNameET.text!, address: PinAddressET.text!, location: Cordinates, tag: PinTag, privacy: false, Id: CurUsr.ID))
         AddCoreData(name: PinNameET.text!, address: PinAddressET.text!, lat: Cordinates.latitude, long: Cordinates.longitude, tag: PinTag, view: false, Id: CurUsr.ID)
@@ -564,7 +576,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             let pin = MKPointAnnotation()
             pin.coordinate = location
             pin.title = element.name
-            pin.subtitle = element.address
+            pin.subtitle = element.tag?.description
             self.MapView.addAnnotation(pin)
             }
             i=i+1
@@ -585,7 +597,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             let pin = MKPointAnnotation()
             pin.coordinate = location
             pin.title = element.name
-            pin.subtitle = element.address
+                pin.subtitle = element.tag?.description
             self.MapView.addAnnotation(pin)
             }
             i=i+1
@@ -601,7 +613,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             let pin = MKPointAnnotation()
             pin.coordinate = location
             pin.title = element.name
-            pin.subtitle = element.address
+            pin.subtitle = element.tag?.description
             self.MapView.addAnnotation(pin)
             }
         }
@@ -648,6 +660,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         self.fetchCoreData()
         
     }
+
 
 }
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
