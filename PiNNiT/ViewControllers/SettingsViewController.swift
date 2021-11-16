@@ -27,6 +27,10 @@ class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
     @IBOutlet weak var MenuView: UIView!
     @IBOutlet weak var MenuButton: UIButton!
 
+    @IBOutlet weak var IDEdit: UITextField!
+    @IBOutlet weak var EmailEdit: UITextField!
+    @IBOutlet weak var LNEdit: UITextField!
+    @IBOutlet weak var FNEdit: UITextField!
     //Core Data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var CoreDataPins:[Pins]?
@@ -38,12 +42,19 @@ class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
         BlurView.bounds = self.view.bounds
         
         BackViewMenu.isHidden = true
+        setUser()
 
         In(desiredView: BlurView)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
             self.animateOut(desiredView: self.BlurView)
+            self.setEditTexts()
             }
-        // Do any additional setup after loading the view.
+    }
+    func setEditTexts(){
+        IDEdit.text = CurUsr.ID
+        EmailEdit.text = CurUsr.Email
+        FNEdit.text = CurUsr.FirstName
+        LNEdit.text = CurUsr.LastName
     }
     func HideMenuView() {
         self.HideMenu()
@@ -143,8 +154,19 @@ class SettingsViewController: UIViewController, SlideMenuViewControllerDelegate{
         
     }
     @IBAction func SignOutButtonTapped(_ sender: Any) {
-        signOutUser()
-        Transition()
+        let alert = UIAlertController(title: "Sign Out?", message: "Are you sure?", preferredStyle: .alert)
+        let yesButton = UIAlertAction(title: "Yes", style: .default) {(action) in
+            self.signOutUser()
+            self.Transition()
+        }
+        let noButton = UIAlertAction(title: "No", style: .default) {(action) in
+            return
+        }
+        alert.addAction(yesButton)
+        alert.addAction(noButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+    @IBAction func SaveButtonTapped(_ sender: Any) {
         
     }
     func Transition(){
