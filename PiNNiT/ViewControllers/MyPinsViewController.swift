@@ -300,6 +300,24 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         cell.NameET.text = CoreDataPins![(indexPath.row)].name
         cell.AddressET.text = CoreDataPins![(indexPath.row)].address
         cell.TagButton.setTitle(CoreDataPins![(indexPath.row)].tag, for: .normal)
+        switch CoreDataPins![(indexPath.row)].tag{
+        case "House":
+            print("House")
+            cell.PinImage.image = UIImage(named:"House")
+        case "Point of Intrest":
+            print("Point of Intrest")
+            cell.PinImage.image = UIImage(named:"POI")
+        case "Park":
+            print("Park")
+            cell.PinImage.image = UIImage(named:"Park")
+        case "Resturant":
+            print("Resturant")
+            cell.PinImage.image = UIImage(named:"Rest")
+        case .none:
+            print("None")
+        case .some(_):
+            print("Some")
+        }
         if (CoreDataPins![(indexPath.row)].view == true){
             cell.PublicButton.setTitle("Make Private", for: .normal)
         } else {

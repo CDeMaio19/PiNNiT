@@ -19,6 +19,7 @@ class PinsViewCell: UITableViewCell{
     @IBOutlet weak var PublicButton: UIButton!
     @IBOutlet weak var DeleteButton: UIButton!
     @IBOutlet weak var PinIDLabel: UILabel!
+    @IBOutlet weak var PinImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

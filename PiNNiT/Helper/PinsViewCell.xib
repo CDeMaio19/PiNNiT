@@ -113,6 +113,7 @@
                 <outlet property="DeleteButton" destination="a7H-Xd-n0w" id="l7a-XH-FOc"/>
                 <outlet property="NameET" destination="6ad-am-lEo" id="yaw-3N-oVs"/>
                 <outlet property="PinIDLabel" destination="S3L-38-mCB" id="3qZ-1u-2Mi"/>
+                <outlet property="PinImage" destination="D3V-41-1BE" id="9Zn-Sb-980"/>
                 <outlet property="PublicButton" destination="iPp-Nf-MHh" id="hKq-xz-g54"/>
                 <outlet property="TagButton" destination="VuQ-PA-zHK" id="XJ8-aY-sGM"/>
             </connections>
