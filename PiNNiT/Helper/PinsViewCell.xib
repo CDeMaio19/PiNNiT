@@ -29,7 +29,7 @@
                         <rect key="frame" x="61" y="10" width="294" height="80"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" textAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-am-lEo">
-                                <rect key="frame" x="0.0" y="0.0" width="294" height="25.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="294" height="39"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="22"/>
@@ -39,38 +39,11 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="hZl-kB-3DD">
-                                <rect key="frame" x="0.0" y="27.5" width="294" height="25"/>
+                                <rect key="frame" x="0.0" y="41" width="294" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="URD-Xu-uzj">
-                                <rect key="frame" x="0.0" y="54.5" width="294" height="25.5"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuQ-PA-zHK">
-                                        <rect key="frame" x="0.0" y="0.0" width="146" height="25.5"/>
-                                        <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Tag">
-                                            <color key="titleColor" red="0.45098039220000002" green="0.99215686270000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="TagButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VkH-bV-x2s"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPp-Nf-MHh">
-                                        <rect key="frame" x="148" y="0.0" width="146" height="25.5"/>
-                                        <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Make Public">
-                                            <color key="titleColor" red="0.45098039220000002" green="0.99215686270000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="PublicButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="r9n-8u-TVU"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7H-Xd-n0w">
@@ -114,8 +87,6 @@
                 <outlet property="NameET" destination="6ad-am-lEo" id="yaw-3N-oVs"/>
                 <outlet property="PinIDLabel" destination="S3L-38-mCB" id="3qZ-1u-2Mi"/>
                 <outlet property="PinImage" destination="D3V-41-1BE" id="9Zn-Sb-980"/>
-                <outlet property="PublicButton" destination="iPp-Nf-MHh" id="hKq-xz-g54"/>
-                <outlet property="TagButton" destination="VuQ-PA-zHK" id="XJ8-aY-sGM"/>
             </connections>
             <point key="canvasLocation" x="200.72463768115944" y="98.4375"/>
         </tableViewCell>

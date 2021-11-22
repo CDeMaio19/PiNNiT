@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F27855626B385C7002ED473 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F27855526B385C7002ED473 /* User.swift */; };
+		2F2A85FC2744715400C3FA3F /* PinSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A85FB2744715400C3FA3F /* PinSelectViewController.swift */; };
 		2F46487A26B0C83100136DAF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46487926B0C83100136DAF /* SignUpViewController.swift */; };
 		2F46487C26B0C84700136DAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46487B26B0C84700136DAF /* LoginViewController.swift */; };
 		2F46487E26B0C85400136DAF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F46487D26B0C85400136DAF /* HomeViewController.swift */; };
@@ -64,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		2F27855526B385C7002ED473 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2F2A85FB2744715400C3FA3F /* PinSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinSelectViewController.swift; sourceTree = "<group>"; };
 		2F46487926B0C83100136DAF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2F46487B26B0C84700136DAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2F46487D26B0C85400136DAF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				2F8B33EE26D7225400843E01 /* MyPinsViewController.swift */,
 				2FC599B3273B3E3700FFFF78 /* MyFriendsViewController.swift */,
 				2FC599B5273B6B0600FFFF78 /* SettingsViewController.swift */,
+				2F2A85FB2744715400C3FA3F /* PinSelectViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 			files = (
 				2F8B33F626D86C0C00843E01 /* PinsViewCell.swift in Sources */,
 				2FC599B02732F10000FFFF78 /* Pins+CoreDataClass.swift in Sources */,
+				2F2A85FC2744715400C3FA3F /* PinSelectViewController.swift in Sources */,
 				2F46488626B0DB4800136DAF /* Help.swift in Sources */,
 				2F8B33EF26D7225400843E01 /* MyPinsViewController.swift in Sources */,
 				2F8B33EB26C32E9500843E01 /* Pin.swift in Sources */,

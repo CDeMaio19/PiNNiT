@@ -25,8 +25,8 @@
         <relationship name="freinds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Friends" inverseName="user" inverseEntity="Friends"/>
     </entity>
     <elements>
+        <element name="Friends" positionX="-45" positionY="90" width="128" height="89"/>
         <element name="Pins" positionX="-63" positionY="-18" width="128" height="134"/>
         <element name="Users" positionX="-54" positionY="45" width="128" height="134"/>
-        <element name="Friends" positionX="-45" positionY="90" width="128" height="89"/>
     </elements>
 </model>

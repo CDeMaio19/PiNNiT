@@ -17,7 +17,9 @@ import CoreData
 private let reuseIdentifier = "DropDownCell"
 private let PinTags = ["House", "Resturant", "Park", "Point of Intrest"] //Add More
 
-class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
+class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, PinSelectViewDelegate {
+    
+    
     
     private lazy var boardManager: BLTNItemManager = {
         let item = BLTNPageItem(title: "Turn On Location Services!")
@@ -42,6 +44,11 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     @IBOutlet weak var FriendsPinButton: UIButton!
     @IBOutlet weak var WorldPinsButton: UIButton!
     @IBOutlet weak var CenterPin: UIImageView!
+    
+    
+    @IBOutlet weak var TopConstraintSelect: NSLayoutConstraint!
+    @IBOutlet weak var PinSelect: UIView!
+    
     
     
     @IBOutlet weak var HomeView: UIView!
@@ -71,6 +78,8 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     var MyPins = [Pin()]
     var PinCount = 0
     @IBOutlet weak var ExitButton: UIButton!
+    @IBOutlet weak var PinPic: UIButton!
+    
     
     //Core Data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -96,7 +105,10 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         TopMenu.layer.cornerRadius = 30
         BottomNav.layer.cornerRadius = 25
         PinConfirmView.layer.cornerRadius = 10
+        PinSelect.layer.cornerRadius = 10
         PinConfirmView.isHidden = true
+        
+        PinSelect.isHidden = true
         
         fetchCoreData()
         setUser()
@@ -107,6 +119,15 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             self.LoadCoreData()
         }*/
         setFriends()
+        centerOnUserLocation()
+        
+        self.TopConstraintSelect.constant = 0
+        self.PinPic.isHidden = true
+        
+        
+    }
+    func HidePinSelect() {
+        self.HidingPinSelect()
     }
     
     func setFriends() {
@@ -136,6 +157,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             }
             
         }
+    var PinSelectViewController:PinSelectViewController?
     var SlideMenuViewController:SlideMenuViewController?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "SlideMenuSegue")
@@ -144,6 +166,14 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
             {
                 self.SlideMenuViewController = controller
                 self.SlideMenuViewController?.delegate = self
+            }
+        }
+        if (segue.identifier == "PinSelectSegue")
+        {
+            if let controller = segue.destination as? PinSelectViewController
+            {
+                self.PinSelectViewController = controller
+                self.PinSelectViewController?.delegate = self
             }
         }
     }
@@ -169,11 +199,27 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         
     }
     
+    private func HidingPinSelect(){
+        UIView.animate(withDuration: 0.2, animations: {
+            self.TopConstraintSelect.constant = 100
+            self.view.layoutIfNeeded()
+        }) { (status) in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.LeadingConstraintMenu.constant = 100
+                self.view.layoutIfNeeded()
+            }) {(status) in
+                self.PinSelect.isHidden = true
+                self.PinPic.isHidden = true
+            }
+            self.HomeView.alpha = 1
+        }
+    }
+    
     @IBAction func MenuButtonPushed(_ sender: Any) {
         
         self.BackViewMenu.isHidden = false
         self.HomeView.alpha = 0.5
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.LeadingConstraintMenu.constant = 10
             self.view.layoutIfNeeded()
         }) { (status) in
@@ -189,8 +235,36 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
        
         
     }
+    func PinSelectPressed(){
+        self.PinSelect.isHidden = false
+        self.HomeView.alpha = 0.5
+        self.TopConstraintSelect.constant = 0
+        UIView.animate(withDuration: 0.0001, animations: {
+            self.TopConstraintSelect.constant = 0
+            self.view.layoutIfNeeded()
+        }) { (status) in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.TopConstraintSelect.constant = -475
+                self.view.layoutIfNeeded()
+                self.view.addTopRoundedCornerToView(targetView: self.PinSelect, desiredCurve: 1)
+                //self.PinSelect.layer.cornerRadius = 75
+                self.PinSelect.layer.borderColor = UIColor.init(red: 0/255, green: 158/255, blue: 171/255, alpha: 1).cgColor
+                self.PinPic.layer.borderColor = UIColor.init(red: 0/255, green: 158/255, blue: 171/255, alpha: 1).cgColor
+                self.PinPic.layer.cornerRadius = 75
+                self.PinPic.isHidden = false
+                self.PinPic.layer.borderWidth = 3.0;
+                self.PinSelect.layer.masksToBounds = true
+                
+                
+            }) {(status) in
+                
+            }
+            
+        }
+    }
     @IBAction func DismissMenuByTap(_ sender: Any) {
         self.HideMenu()
+        self.HidingPinSelect()
     }
     
     //Bottom Menu Functions
@@ -362,7 +436,9 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         else{
             annotationView?.annotation = annotation
         }
-        
+        let calloutButton = UIButton(type: .detailDisclosure)
+        annotationView!.rightCalloutAccessoryView = calloutButton
+        annotationView!.sizeToFit()
         switch annotation.subtitle {
         case "House":
             annotationView?.image = UIImage(named:"House@3x")
@@ -377,6 +453,35 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         }
         
         return annotationView
+    }
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            if control == view.rightCalloutAccessoryView {
+                centerOnPin(location: view.annotation!.coordinate)
+                PinSelectPressed()
+            }
+        }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let SelectedPin = view.annotation?.coordinate
+        for element in CoreDataPins! {
+            if (element.lat == SelectedPin?.latitude && element.lon == SelectedPin?.longitude){
+                element.view = true
+                PinSelectViewController?.viewDidLoad()
+            }
+        }
+    }
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        let SelectedPin = view.annotation?.coordinate
+        for element in CoreDataPins! {
+            if (element.lat == SelectedPin?.latitude && element.lon == SelectedPin?.longitude){
+                element.view = false
+            }
+        }
+    }
+    func centerOnPin(location: CLLocationCoordinate2D){
+        var loc = location
+        loc.latitude = loc.latitude - 0.0023
+        let region = MKCoordinateRegion.init(center: loc, latitudinalMeters: 500, longitudinalMeters: 500)
+        MapView.setRegion(region, animated: true)
     }
     @IBAction func CheckButtonClicked(_ sender: Any) {
         CenterPoint = MapView.centerCoordinate
@@ -565,6 +670,7 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
 //Core Data
     
     func loadMyCorePins(){
+        dump(CoreDataPins)
         let allAnnotations = self.MapView.annotations
         self.MapView.removeAnnotations(allAnnotations)
         var i = 0

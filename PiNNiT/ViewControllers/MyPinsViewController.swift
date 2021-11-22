@@ -299,7 +299,7 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         let cell = tableView.dequeueReusableCell(withIdentifier: "PinsViewCell", for: indexPath) as! PinsViewCell
         cell.NameET.text = CoreDataPins![(indexPath.row)].name
         cell.AddressET.text = CoreDataPins![(indexPath.row)].address
-        cell.TagButton.setTitle(CoreDataPins![(indexPath.row)].tag, for: .normal)
+        //cell.TagButton.setTitle(CoreDataPins![(indexPath.row)].tag, for: .normal)
         switch CoreDataPins![(indexPath.row)].tag{
         case "House":
             print("House")
@@ -319,9 +319,9 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
             print("Some")
         }
         if (CoreDataPins![(indexPath.row)].view == true){
-            cell.PublicButton.setTitle("Make Private", for: .normal)
+            //cell.PublicButton.setTitle("Make Private", for: .normal)
         } else {
-        cell.PublicButton.setTitle("Make Public", for: .normal)
+        //cell.PublicButton.setTitle("Make Public", for: .normal)
         }
         cell.PinIDLabel.text = String(indexPath.row)
         return cell
