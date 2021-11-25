@@ -19,8 +19,6 @@ private let PinTags = ["House", "Resturant", "Park", "Point of Intrest"] //Add M
 
 class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, PinSelectViewDelegate {
     
-    
-    
     private lazy var boardManager: BLTNItemManager = {
         let item = BLTNPageItem(title: "Turn On Location Services!")
         item.image = UIImage(named: "Nav.png")
@@ -126,6 +124,12 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         
         
     }
+    func MakePinEnabbled(){
+        PinPic.isUserInteractionEnabled = true
+    }
+    func MakePinInabbled() {
+        PinPic.isUserInteractionEnabled = false
+    }
     func HidePinSelect() {
         self.HidingPinSelect()
     }
@@ -216,9 +220,16 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
     }
     
     @IBAction func MenuButtonPushed(_ sender: Any) {
-        
+        if PinSelect.isHidden == false {
+            self.HidePinSelect()
+        } else{
         self.BackViewMenu.isHidden = false
         self.HomeView.alpha = 0.5
+            
+        UIView.animate(withDuration: 0.0001, animations: {
+            self.LeadingConstraintMenu.constant = -150
+            self.view.layoutIfNeeded()
+        }) { (status) in
         UIView.animate(withDuration: 0.3, animations: {
             self.LeadingConstraintMenu.constant = 10
             self.view.layoutIfNeeded()
@@ -231,6 +242,8 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
                 
             }
             
+        }
+        }
         }
        
         
@@ -263,8 +276,10 @@ class HomeViewController: UIViewController, SlideMenuViewControllerDelegate, MKM
         }
     }
     @IBAction func DismissMenuByTap(_ sender: Any) {
-        self.HideMenu()
-        self.HidingPinSelect()
+        self.HideMenuView()
+        if (self.TopConstraintSelect.constant == -475){
+        self.HidePinSelect()
+        }
     }
     
     //Bottom Menu Functions

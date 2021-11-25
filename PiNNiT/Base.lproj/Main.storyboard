@@ -1343,6 +1343,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="l7t-Lv-9Bg"/>
                         <color key="backgroundColor" red="0.74117647060000003" green="0.97647058819999999" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="BAu-xW-mNr" firstAttribute="leading" secondItem="nQN-e8-c8T" secondAttribute="trailing" id="8Ri-1R-qja"/>

@@ -10,6 +10,8 @@ import CoreData
 
 protocol PinSelectViewDelegate {
     func HidePinSelect()
+    func MakePinInabbled()
+    func MakePinEnabbled()
 }
 
 class PinSelectViewController: UIViewController {
@@ -25,6 +27,7 @@ class PinSelectViewController: UIViewController {
     var CoreDataUser:[Users]?
     var CurUsr = User()
     var FriendUser = User()
+    var MePin = false
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
@@ -106,9 +109,13 @@ class PinSelectViewController: UIViewController {
                 if (CurUsr.ID == element.creator){
                     OwnerEditText.text = "Me"
                     makePinInfoEdditable()
+                    self.delegate?.MakePinEnabbled()
+                    MePin = true
                 }else{
                     PinInfoNotEdittable()
                     GetNameOfOwner(ID: element.creator!)
+                    self.delegate?.MakePinInabbled()
+                    MePin = false
                 }
                 
             }

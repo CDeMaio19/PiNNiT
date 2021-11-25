@@ -16,6 +16,7 @@ import CoreData
 class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, PinsViewCellDelegate{
     
     
+    
     @IBOutlet weak var TableView: UITableView!
     
     @IBOutlet var BlurView: UIVisualEffectView!
@@ -155,6 +156,9 @@ class MyPinsViewController: UIViewController, SlideMenuViewControllerDelegate, U
         self.HideMenu()
         self.saveCoreData()
         
+    }
+    func MakePicInabbled() {
+        print("Pic Inabbled")
     }
     private func HideMenu() {
         
